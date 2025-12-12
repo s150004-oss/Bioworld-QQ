@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIOL 2101: Practical 2 - Diversity of Protista</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #e8f5e9;
+            color: #1a3c34;
+            line-height: 1.6;
+            background-image: radial-gradient(circle at 20% 80%, #c8e6c9 0%, transparent 20%),
+                              radial-gradient(circle at 80% 20%, #a5d6a7 0%, transparent 20%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1b5e20 0%, #388e3c 100%);
+            color: white;
+            padding: 30px 0;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%234caf50' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.1;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .protist-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .content-section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .section-title {
+            color: #2e7d32;
+            border-bottom: 2px solid #c8e6c9;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            font-size: 1.5rem;
+        }
+        
+        .protist-animation {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .animation-container {
+            width: 100%;
+            height: 350px;
+            position: relative;
+            background: linear-gradient(180deg, #0d281c 0%, #1a3c34 100%);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .pond-water {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, #1a5276, #3498db);
+            opacity: 0.7;
+        }
+        
+        .protist {
+            position: absolute;
+            border-radius: 50%;
+            transition: all 0.5s ease;
+        }
+        
+        .paramecium {
+            width: 60px;
+            height: 30px;
+            background-color: #f1c40f;
+            top: 100px;
+            left: 100px;
+            animation: paramecium-swim 8s infinite linear;
+        }
+        
+        .paramecium:before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #e74c3c;
+            border-radius: 50%;
+            top: 10px;
+            left: 5px;
+        }
+        
+        .paramecium:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            bottom: 0;
+            left: 0;
+        }
+        
+        .euglena {
+            width: 40px;
+            height: 10px;
+            background-color: #27ae60;
+            top: 150px;
+            left: 200px;
+            animation: euglena-swim 10s infinite linear;
+        }
+        
+        .euglena:before {
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: #f39c12;
+            border-radius: 50%;
+            top: 2px;
+            right: 5px;
+        }
+        
+        .euglena:after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 2px;
+            background-color: #2ecc71;
+            border-radius: 1px;
+            top: 4px;
+            left: -10px;
+            transform: rotate(45deg);
+        }
+        
+        .amoeba {
+            width: 50px;
+            height: 40px;
+            background-color: #9b59b6;
+            top: 180px;
+            left: 300px;
+            border-radius: 50% 30% 50% 30%;
+            animation: amoeba-move 12s infinite ease-in-out;
+        }
+        
+        .amoeba:before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #8e44ad;
+            border-radius: 50%;
+            top: 12px;
+            left: 17px;
+        }
+        
+        .protist-info {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .protist-btn {
+            background-color: #388e3c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .protist-btn:hover {
+            background-color: #2e7d32;
+        }
+        
+        .instructions {
+            background-color: #f1f8e9;
+            border-left: 4px solid #689f38;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .instructions h4 {
+            color: #558b2f;
+            margin-bottom: 10px;
+        }
+        
+        ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .objectives-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .objective-item {
+            background-color: #f1f8e9;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 3px solid #388e3c;
+        }
+        
+        .objective-item i {
+            color: #388e3c;
+            margin-right: 10px;
+        }
+        
+        .protist-types {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .protist-card {
+            flex: 1;
+            min-width: 200px;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border-top: 4px solid;
+        }
+        
+        .ciliates {
+            border-top-color: #f39c12;
+        }
+        
+        .sarcodina {
+            border-top-color: #9b59b6;
+        }
+        
+        .mastigophora {
+            border-top-color: #27ae60;
+        }
+        
+        .protist-card h4 {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .protist-card p {
+            font-size: 0.9rem;
+        }
+        
+        .locomotion-chart {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .locomotion-item {
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .locomotion-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #e8f5e9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 1.5rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #388e3c;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid #c8e6c9;
+            color: #2e7d32;
+            font-size: 0.9rem;
+        }
+        
+        .highlight {
+            background-color: #e8f5e9;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        
+        @keyframes paramecium-swim {
+            0% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(150px) translateY(30px); }
+            50% { transform: translateX(300px) translateY(0); }
+            75% { transform: translateX(150px) translateY(-30px); }
+            100% { transform: translateX(0) translateY(0); }
+        }
+        
+        @keyframes euglena-swim {
+            0% { transform: translateX(0) translateY(0) rotate(0deg); }
+            25% { transform: translateX(100px) translateY(50px) rotate(10deg); }
+            50% { transform: translateX(200px) translateY(0) rotate(0deg); }
+            75% { transform: translateX(100px) translateY(-50px) rotate(-10deg); }
+            100% { transform: translateX(0) translateY(0) rotate(0deg); }
+        }
+        
+        @keyframes amoeba-move {
+            0% { 
+                border-radius: 50% 30% 50% 30%;
+                transform: translateX(0) translateY(0);
+            }
+            25% { 
+                border-radius: 40% 50% 40% 50%;
+                transform: translateX(50px) translateY(20px);
+            }
+            50% { 
+                border-radius: 60% 30% 40% 60%;
+                transform: translateX(100px) translateY(0);
+            }
+            75% { 
+                border-radius: 30% 60% 50% 40%;
+                transform: translateX(50px) translateY(-20px);
+            }
+            100% { 
+                border-radius: 50% 30% 50% 30%;
+                transform: translateX(0) translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .protist-icon {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin: 15px auto;
+            }
+            
+            .animation-container {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>BIOL 2101: General Biology I</h1>
+            <p>Practical 2: Diversity of Protista (Eukaryotic Cells)</p>
+            <p>Sultan Qaboos University | Department of Biology</p>
+            <div class="protist-icon">
+                <i class="fas fa-microscope"></i>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="content-section">
+                <h2 class="section-title"><i class="fas fa-bullseye"></i> Practical Objectives</h2>
+                <p>Protista are single eukaryotic cell organisms with no cell wall. Compared with a human cell, they are immensely complex, especially in the most advanced group, like the ciliates. A protist is a whole organism in a single cell.</p>
+                
+                <div class="objectives-list">
+                    <div class="objective-item">
+                        <i class="fas fa-video"></i> Observe aspects of behavior and diversity in Protist videos
+                    </div>
+                    <div class="objective-item">
+                        <i class="fas fa-search"></i> Study and draw characteristics of different types of Protists
+                    </div>
+                    <div class="objective-item">
+                        <i class="fas fa-eye"></i> Observe behavior of live Protista in pond water
+                    </div>
+                </div>
+                
+                <div class="instructions">
+                    <h4><i class="fas fa-vial"></i> Materials Needed</h4>
+                    <ul>
+                        <li>Plastic pipettes, microscope slides, cover slips</li>
+                        <li>Permanent slides of <em>Paramecium, Bursaria, Euglena, Amoeba, Arcella</em></li>
+                        <li>Fresh pond water, "Protoslo" or "Detain" (to slow fast-moving protists)</li>
+                        <li>Vinegar/dilute acetic acid</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="protist-animation">
+                <h2 class="section-title"><i class="fas fa-play-circle"></i> Protist Diversity Animation</h2>
+                <p>Observe the different protists moving in their aquatic environment. Each has unique locomotion methods and cellular structures.</p>
+                
+                <div class="animation-container">
+                    <div class="pond-water"></div>
+                    <div class="protist paramecium" id="paramecium"></div>
+                    <div class="protist euglena" id="euglena"></div>
+                    <div class="protist amoeba" id="amoeba"></div>
+                </div>
+                
+                <p class="animation-description">The animation shows three major protist types: <span class="highlight">Paramecium</span> (ciliate), <span class="highlight">Euglena</span> (flagellate), and <span class="highlight">Amoeba</span> (amoeboid).</p>
+                
+                <div class="protist-info">
+                    <button class="protist-btn" id="showParamecium">
+                        <i class="fas fa-swimming-pool"></i> Paramecium
+                    </button>
+                    <button class="protist-btn" id="showEuglena">
+                        <i class="fas fa-flag"></i> Euglena
+                    </button>
+                    <button class="protist-btn" id="showAmoeba">
+                        <i class="fas fa-blob"></i> Amoeba
+                    </button>
+                    <button class="protist-btn" id="showAll">
+                        <i class="fas fa-water"></i> Show All
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="section-title"><i class="fas fa-tv"></i> Video Summaries</h2>
+            
+            <h3><i class="fas fa-film"></i> Video 1: Flagellates & Amoebas (15 minutes)</h3>
+            <p>Protists have eukaryotic cells, so they differ from bacteria in having a nucleus and cell organelles. They can be divided into 3 main groups depending on their locomotion:</p>
+            
+            <div class="protist-types">
+                <div class="protist-card mastigophora">
+                    <h4><i class="fas fa-flag"></i> Flagellates</h4>
+                    <p>Move using whip-like flagella. Examples: <em>Euglena, Trypanosoma, Volvox</em></p>
+                </div>
+                <div class="protist-card sarcodina">
+                    <h4><i class="fas fa-blob"></i> Amoebas</h4>
+                    <p>Move using pseudopodia (false feet). Examples: <em>Amoeba, Arcella, Actinopods</em></p>
+                </div>
+                <div class="protist-card ciliates">
+                    <h4><i class="fas fa-swimming-pool"></i> Ciliates</h4>
+                    <p>Move using numerous hair-like cilia. Examples: <em>Paramecium, Bursaria, Vorticella</em></p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-film"></i> Video 2: The Ciliates (15 minutes)</h3>
+            <p>Decaying plants in a pond are attacked by a range of Ciliates. You will learn about their complex cellular structures including oral grooves, contractile vacuoles, and dual nuclei system.</p>
+            
+            <div class="instructions">
+                <h4><i class="fas fa-lightbulb"></i> Key Protist Structures</h4>
+                <ul>
+                    <li><strong>Contractile Vacuole:</strong> Removes excess water from the cell</li>
+                    <li><strong>Oral Groove:</strong> Channel leading to the cytostome (mouth)</li>
+                    <li><strong>Macronucleus:</strong> Controls daily cell activities</li>
+                    <li><strong>Micronucleus:</strong> Involved in sexual reproduction</li>
+                    <li><strong>Pellicle:</strong> Flexible "skin" that gives shape to ciliates</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="section-title"><i class="fas fa-search"></i> Observing Protists</h2>
+            
+            <h3><i class="fas fa-microscope"></i> Tips for Finding and Focusing Protists</h3>
+            <ul>
+                <li>Protists are small and many are transparent - search systematically under high power (40X)</li>
+                <li>Use a search pattern to cover the entire slide methodically</li>
+                <li>Focus can be challenging - don't focus on dust on the cover slip!</li>
+                <li>First focus on part of the slide with no cover slip to establish reference point</li>
+                <li>Adjust iris diaphragm for maximum sharpness (but not too far or light will be insufficient)</li>
+            </ul>
+            
+            <h3><i class="fas fa-draw-polygon"></i> Protists to Observe and Draw</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Protist</th>
+                        <th>Phylum</th>
+                        <th>Key Characteristics</th>
+                        <th>Structures to Label</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Paramecium</strong></td>
+                        <td>Ciliata</td>
+                        <td>Ciliate with oral groove, contractile vacuoles, cilia</td>
+                        <td>Cilia, oral groove, macronucleus, micronucleus, contractile vacuole</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bursaria</strong></td>
+                        <td>Ciliata</td>
+                        <td>Large ciliate with ribbon-shaped macronucleus</td>
+                        <td>Oral groove, ribbon macronucleus, cytostome</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Euglena</strong></td>
+                        <td>Mastigophora</td>
+                        <td>Flagellate with chloroplasts and eyespot</td>
+                        <td>Flagellum, eyespot, chloroplasts, nucleus</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Amoeba</strong></td>
+                        <td>Rhizopoda</td>
+                        <td>Amoeboid movement with pseudopodia</td>
+                        <td>Pseudopodia, nucleus, food vacuoles, contractile vacuole</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Arcella</strong></td>
+                        <td>Rhizopoda</td>
+                        <td>Testate amoeba with chitin shell</td>
+                        <td>Test (shell), pseudopodia, nuclei</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="locomotion-chart">
+                <div class="locomotion-item">
+                    <div class="locomotion-icon" style="color: #f39c12;">
+                        <i class="fas fa-swimming-pool"></i>
+                    </div>
+                    <p><strong>Cilia</strong><br>Numerous hair-like structures</p>
+                </div>
+                <div class="locomotion-item">
+                    <div class="locomotion-icon" style="color: #9b59b6;">
+                        <i class="fas fa-blob"></i>
+                    </div>
+                    <p><strong>Pseudopodia</strong><br>Temporary projections of cytoplasm</p>
+                </div>
+                <div class="locomotion-item">
+                    <div class="locomotion-icon" style="color: #27ae60;">
+                        <i class="fas fa-flag"></i>
+                    </div>
+                    <p><strong>Flagella</strong><br>Whip-like tail for propulsion</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="section-title"><i class="fas fa-water"></i> Live Protist Observation</h2>
+            
+            <h3><i class="fas fa-flask"></i> Procedure for Observing Live Protists in Pond Water</h3>
+            <ol>
+                <li>Collect pond water in a jar and add decomposing leaves</li>
+                <li>Let it age for 5-6 days (provided in lab)</li>
+                <li>Use a dropper to pipette a small drop of pond water on a clean slide</li>
+                <li>Add a drop of "Detain" or "Protoslo" to slow fast-moving protists</li>
+                <li>Place a coverslip and observe under low (10X) and high power (40X)</li>
+                <li>Make a sketch of organisms found</li>
+                <li>Describe observed behaviors: movement, feeding, obstacle avoidance</li>
+            </ol>
+            
+            <div class="instructions">
+                <h4><i class="fas fa-lightbulb"></i> Behavioral Observations</h4>
+                <p>When observing live protists, note:</p>
+                <ul>
+                    <li><strong>Movement patterns:</strong> Do they swim in straight lines, spiral, or meander?</li>
+                    <li><strong>Feeding behavior:</strong> Can you observe phagocytosis or filter feeding?</li>
+                    <li><strong>Response to stimuli:</strong> Do they move toward or away from light?</li>
+                    <li><strong>Interaction with environment:</strong> How do they navigate around obstacles?</li>
+                </ul>
+            </div>
+        </div>
+        
+        <footer>
+            <p>BIOL 2101 Laboratory Manual - Sultan Qaboos University</p>
+            <p>Protists represent a fascinating bridge between simple prokaryotes and complex multicellular eukaryotes. Their study provides insight into eukaryotic evolution.</p>
+            <p><i class="fas fa-vial"></i> Remember: Protists are complete organisms within a single cell - observe carefully to appreciate their complexity!</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Interactive elements for protist animation
+        document.getElementById('showParamecium').addEventListener('click', function() {
+            document.getElementById('paramecium').style.opacity = '1';
+            document.getElementById('euglena').style.opacity = '0.2';
+            document.getElementById('amoeba').style.opacity = '0.2';
+            alert('Paramecium: A ciliate with thousands of cilia for movement. Has an oral groove for feeding, contractile vacuoles for osmoregulation, and both macro and micronuclei.');
+        });
+        
+        document.getElementById('showEuglena').addEventListener('click', function() {
+            document.getElementById('paramecium').style.opacity = '0.2';
+            document.getElementById('euglena').style.opacity = '1';
+            document.getElementById('amoeba').style.opacity = '0.2';
+            alert('Euglena: A flagellate with chloroplasts for photosynthesis. Has an eyespot to detect light and stores paramylon (a carbohydrate). Can switch between autotrophic and heterotrophic nutrition.');
+        });
+        
+        document.getElementById('showAmoeba').addEventListener('click', function() {
+            document.getElementById('paramecium').style.opacity = '0.2';
+            document.getElementById('euglena').style.opacity = '0.2';
+            document.getElementById('amoeba').style.opacity = '1';
+            alert('Amoeba: Moves using pseudopodia ("false feet"). Engulfs food by phagocytosis. Has a contractile vacuole to regulate water content. Cytoplasm shows streaming movement.');
+        });
+        
+        document.getElementById('showAll').addEventListener('click', function() {
+            document.getElementById('paramecium').style.opacity = '1';
+            document.getElementById('euglena').style.opacity = '1';
+            document.getElementById('amoeba').style.opacity = '1';
+            alert('All protists visible. Notice the different locomotion methods: cilia, flagella, and pseudopodia.');
+        });
+        
+        // Add hover effects to protist cards
+        const protistCards = document.querySelectorAll('.protist-card');
+        protistCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

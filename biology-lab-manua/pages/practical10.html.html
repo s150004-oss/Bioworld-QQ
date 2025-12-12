@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 10: Mitosis and Meiosis in Cells</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --mitosis-blue: #1565c0;
+            --meiosis-purple: #8e24aa;
+            --chromosome-red: #e53935;
+            --chromosome-blue: #1e88e5;
+            --interphase-green: #43a047;
+            --dark-bg: #1a1a2e;
+            --light-bg: #f3e5f5;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: var(--light-bg);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(142, 36, 170, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(21, 101, 192, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(142, 36, 170, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid var(--meiosis-purple);
+            position: relative;
+        }
+        
+        .chromosome-icon {
+            font-size: 5rem;
+            color: var(--chromosome-red);
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: chromosomeSpin 6s linear infinite;
+            text-shadow: 0 0 30px rgba(229, 57, 53, 0.7);
+        }
+        
+        @keyframes chromosomeSpin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        
+        h1 {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, var(--mitosis-blue), var(--meiosis-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(21, 101, 192, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            color: #e1bee7;
+            margin-bottom: 25px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        .chromosome {
+            position: absolute;
+            width: 30px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--chromosome-red), var(--chromosome-blue));
+            border-radius: 15px;
+            animation: chromosomeFloat 20s linear infinite;
+            opacity: 0.7;
+        }
+        
+        @keyframes chromosomeFloat {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(100vw, -100vh) rotate(720deg); }
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(142, 36, 170, 0.1);
+        }
+        
+        .section:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        h2 {
+            color: var(--mitosis-blue);
+            margin-bottom: 25px;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        h2 i {
+            color: var(--meiosis-purple);
+            background: rgba(142, 36, 170, 0.2);
+            padding: 12px;
+            border-radius: 50%;
+        }
+        
+        .concept-box {
+            background: rgba(21, 101, 192, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 5px solid var(--mitosis-blue);
+            transition: transform 0.3s ease;
+        }
+        
+        .concept-box:hover {
+            transform: translateX(10px);
+        }
+        
+        .phase-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+        
+        .phase-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid var(--interphase-green);
+            counter-increment: phase-counter;
+        }
+        
+        .phase-card::before {
+            content: counter(phase-counter);
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: var(--mitosis-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .phase-card:hover {
+            background: rgba(21, 101, 192, 0.15);
+            transform: scale(1.03);
+        }
+        
+        .phase-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: #bbdefb;
+            font-size: 1.4rem;
+        }
+        
+        .phase-icon {
+            font-size: 2rem;
+            color: var(--chromosome-red);
+        }
+        
+        .cell-cycle-demo {
+            height: 300px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .cell-cycle {
+            position: relative;
+            width: 250px;
+            height: 250px;
+        }
+        
+        .cell-cycle-path {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px dashed var(--interphase-green);
+            border-radius: 50%;
+        }
+        
+        .phase-dot {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+            animation: phaseGlow 3s infinite alternate;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .phase-dot:hover {
+            transform: scale(1.3);
+        }
+        
+        @keyframes phaseGlow {
+            0% { box-shadow: 0 0 5px currentColor; }
+            100% { box-shadow: 0 0 20px currentColor; }
+        }
+        
+        .interphase-dot { background: var(--interphase-green); top: 50%; left: 0; transform: translate(-50%, -50%); }
+        .prophase-dot { background: #ff9800; top: 10%; left: 25%; }
+        .metaphase-dot { background: #ff5722; top: 10%; left: 75%; }
+        .anaphase-dot { background: #e91e63; top: 50%; left: 100%; transform: translate(-50%, -50%); }
+        .telophase-dot { background: #9c27b0; top: 90%; left: 75%; }
+        .cytokinesis-dot { background: #673ab7; top: 90%; left: 25%; }
+        
+        .mitosis-demo {
+            height: 250px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            margin: 30px 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .cell {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(67, 160, 71, 0.2);
+            border: 2px solid var(--interphase-green);
+            position: relative;
+            margin: 0 20px;
+            transition: all 2s ease;
+            overflow: hidden;
+        }
+        
+        .chromosome-pair {
+            position: absolute;
+            width: 40px;
+            height: 10px;
+            background: linear-gradient(to right, var(--chromosome-red), var(--chromosome-blue));
+            border-radius: 5px;
+            transition: all 2s ease;
+        }
+        
+        .centromere {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ffd600;
+            border-radius: 50%;
+            z-index: 2;
+        }
+        
+        .spindle-fiber {
+            position: absolute;
+            height: 2px;
+            background: #9e9e9e;
+            transform-origin: center left;
+            z-index: 1;
+        }
+        
+        .comparison-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .process-box {
+            width: 400px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .process-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .process-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid;
+        }
+        
+        .mitosis-title { color: var(--mitosis-blue); border-color: var(--mitosis-blue); }
+        .meiosis-title { color: var(--meiosis-purple); border-color: var(--meiosis-purple); }
+        
+        .chromosome-count {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #ffd600;
+        }
+        
+        .division-visual {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 30px 0;
+        }
+        
+        .parent-cell {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(21, 101, 192, 0.3);
+            border: 2px solid var(--mitosis-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            position: relative;
+        }
+        
+        .division-arrow {
+            font-size: 2.5rem;
+            color: var(--meiosis-purple);
+            margin: 0 20px;
+            animation: arrowPulse 2s infinite;
+        }
+        
+        @keyframes arrowPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .daughter-cells {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .daughter-cell {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(142, 36, 170, 0.3);
+            border: 2px solid var(--meiosis-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 25px 0;
+            border-radius: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: rgba(142, 36, 170, 0.4);
+            color: #e1bee7;
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        tr:hover {
+            background: rgba(142, 36, 170, 0.1);
+        }
+        
+        .highlight-box {
+            background: rgba(255, 193, 7, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #ffd600;
+        }
+        
+        .chromatid {
+            position: absolute;
+            width: 15px;
+            height: 50px;
+            background: var(--chromosome-red);
+            border-radius: 7px;
+            animation: chromatidFloat 15s linear infinite;
+        }
+        
+        @keyframes chromatidFloat {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(100vw, -100vh) rotate(360deg); }
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(142, 36, 170, 0.3);
+            color: #e1bee7;
+            font-size: 0.95rem;
+        }
+        
+        .practical-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+        }
+        
+        .nav-btn {
+            padding: 12px 25px;
+            background: rgba(142, 36, 170, 0.3);
+            border: 2px solid var(--meiosis-purple);
+            border-radius: 50px;
+            color: var(--meiosis-purple);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-btn:hover {
+            background: var(--meiosis-purple);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(142, 36, 170, 0.3);
+        }
+        
+        .stage-visual {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stage {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .stage:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        @media (max-width: 992px) {
+            h1 { font-size: 2.5rem; }
+            .phase-container { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+            .comparison-container { flex-direction: column; align-items: center; }
+            .process-box { width: 100%; max-width: 500px; }
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 25px; }
+            h1 { font-size: 2rem; }
+            .chromosome-icon { font-size: 3.5rem; }
+            .phase-container { grid-template-columns: 1fr; }
+            .practical-nav { flex-direction: column; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Floating chromosomes in background -->
+        <div class="chromosome" style="top: 10%; left: 5%; animation-delay: 0s;"></div>
+        <div class="chromosome" style="top: 20%; left: 30%; animation-delay: 2s; transform: scale(0.8);"></div>
+        <div class="chromosome" style="top: 40%; left: 70%; animation-delay: 4s; transform: scale(1.2);"></div>
+        <div class="chromosome" style="top: 60%; left: 50%; animation-delay: 6s;"></div>
+        <div class="chromosome" style="top: 80%; left: 20%; animation-delay: 8s; transform: scale(0.9);"></div>
+        
+        <!-- Floating chromatids -->
+        <div class="chromatid" style="top: 15%; left: 15%; animation-delay: 1s;"></div>
+        <div class="chromatid" style="top: 25%; left: 75%; animation-delay: 3s;"></div>
+        <div class="chromatid" style="top: 65%; left: 25%; animation-delay: 5s;"></div>
+        
+        <header>
+            <div class="chromosome-icon">
+                <i class="fas fa-dna"></i>
+            </div>
+            <h1>Practical 10: Mitosis and Meiosis in Cells</h1>
+            <p class="subtitle">Investigating nuclear division processes: mitosis for growth and repair, meiosis for gamete formation and genetic diversity</p>
+            <div class="concept-box">
+                <h3><i class="fas fa-divide"></i> Key Concepts</h3>
+                <p><strong>Mitosis:</strong> Nuclear division producing two genetically identical daughter cells (2n → 2n). <strong>Meiosis:</strong> Two nuclear divisions producing four genetically unique haploid cells (2n → n). <strong>Chromosomes:</strong> Structures carrying genetic information that duplicate and separate during cell division.</p>
+            </div>
+        </header>
+        
+        <section class="section">
+            <h2><i class="fas fa-sync-alt"></i> The Cell Cycle</h2>
+            
+            <div class="cell-cycle-demo">
+                <div class="cell-cycle">
+                    <div class="cell-cycle-path"></div>
+                    <div class="phase-dot interphase-dot" title="Interphase: Cell growth and DNA replication">
+                        <div>Interphase</div>
+                        <div style="font-size: 0.7rem;">(G1, S, G2)</div>
+                    </div>
+                    <div class="phase-dot prophase-dot" title="Prophase: Chromosomes condense, nuclear envelope breaks down">
+                        Prophase
+                    </div>
+                    <div class="phase-dot metaphase-dot" title="Metaphase: Chromosomes align at metaphase plate">
+                        Metaphase
+                    </div>
+                    <div class="phase-dot anaphase-dot" title="Anaphase: Sister chromatids separate">
+                        Anaphase
+                    </div>
+                    <div class="phase-dot telophase-dot" title="Telophase: Nuclear envelopes reform">
+                        Telophase
+                    </div>
+                    <div class="phase-dot cytokinesis-dot" title="Cytokinesis: Cytoplasm divides">
+                        Cytokinesis
+                    </div>
+                </div>
+            </div>
+            
+            <div class="phase-container">
+                <div class="phase-card">
+                    <div class="phase-title">
+                        <i class="fas fa-expand-arrows-alt phase-icon"></i>
+                        <span>Interphase</span>
+                    </div>
+                    <p><strong>G1 Phase:</strong> Cell growth and protein synthesis</p>
+                    <p><strong>S Phase:</strong> DNA replication (chromosomes duplicate)</p>
+                    <p><strong>G2 Phase:</strong> Preparation for mitosis</p>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 5px;">
+                        <small><i class="fas fa-info-circle" style="color: #bbdefb;"></i> 90% of cell cycle spent in interphase</small>
+                    </div>
+                </div>
+                
+                <div class="phase-card">
+                    <div class="phase-title">
+                        <i class="fas fa-compress-arrows-alt phase-icon"></i>
+                        <span>Mitosis (M Phase)</span>
+                    </div>
+                    <p><strong>Prophase:</strong> Chromosomes condense, spindle forms</p>
+                    <p><strong>Metaphase:</strong> Chromosomes align at equator</p>
+                    <p><strong>Anaphase:</strong> Sister chromatids separate</p>
+                    <p><strong>Telophase:</strong> Nuclear envelopes reform</p>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 5px;">
+                        <small><i class="fas fa-info-circle" style="color: #bbdefb;"></i> Followed by cytokinesis</small>
+                    </div>
+                </div>
+                
+                <div class="phase-card">
+                    <div class="phase-title">
+                        <i class="fas fa-random phase-icon"></i>
+                        <span>Meiosis I & II</span>
+                    </div>
+                    <p><strong>Meiosis I:</strong> Homologous chromosomes separate</p>
+                    <p><strong>Interkinesis:</strong> Brief resting phase</p>
+                    <p><strong>Meiosis II:</strong> Sister chromatids separate</p>
+                    <p><strong>Result:</strong> 4 haploid gametes</p>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 5px;">
+                        <small><i class="fas fa-info-circle" style="color: #bbdefb;"></i> Includes crossing-over</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2><i class="fas fa-exchange-alt"></i> Mitosis vs Meiosis Comparison</h2>
+            
+            <div class="comparison-container">
+                <div class="process-box">
+                    <div class="process-title mitosis-title">
+                        <i class="fas fa-clone"></i> MITOSIS
+                    </div>
+                    <div class="chromosome-count">2n → 2n</div>
+                    <p><strong>Purpose:</strong> Growth, repair, asexual reproduction</p>
+                    <p><strong>Divisions:</strong> One nuclear division</p>
+                    <p><strong>Daughter Cells:</strong> 2 genetically identical diploid cells</p>
+                    <p><strong>Occurs in:</strong> Somatic (body) cells</p>
+                    
+                    <div class="division-visual">
+                        <div class="parent-cell">2n</div>
+                        <div class="division-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                        <div class="daughter-cells">
+                            <div class="daughter-cell">2n</div>
+                            <div class="daughter-cell">2n</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="process-box">
+                    <div class="process-title meiosis-title">
+                        <i class="fas fa-dna"></i> MEIOSIS
+                    </div>
+                    <div class="chromosome-count">2n → n</div>
+                    <p><strong>Purpose:</strong> Gamete formation, genetic diversity</p>
+                    <p><strong>Divisions:</strong> Two nuclear divisions</p>
+                    <p><strong>Daughter Cells:</strong> 4 genetically unique haploid cells</p>
+                    <p><strong>Occurs in:</strong> Germ cells (gonads)</p>
+                    
+                    <div class="division-visual">
+                        <div class="parent-cell">2n</div>
+                        <div class="division-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                        <div class="daughter-cells">
+                            <div class="daughter-cell">n</div>
+                            <div class="daughter-cell">n</div>
+                            <div class="daughter-cell">n</div>
+                            <div class="daughter-cell">n</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Mitosis</th>
+                            <th>Meiosis</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Number of Divisions</strong></td>
+                            <td>One</td>
+                            <td>Two (Meiosis I & II)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Synapsis & Crossing Over</strong></td>
+                            <td>No</td>
+                            <td>Yes (Prophase I)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Chromosome Number</strong></td>
+                            <td>Maintained (2n → 2n)</td>
+                            <td>Reduced by half (2n → n)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Genetic Variation</strong></td>
+                            <td>Minimal (clones)</td>
+                            <td>High (independent assortment & crossing over)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Resulting Cells</strong></td>
+                            <td>2 diploid somatic cells</td>
+                            <td>4 haploid gametes</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2><i class="fas fa-microscope"></i> Laboratory Experiments</h2>
+            
+            <div class="phase-container">
+                <div class="phase-card">
+                    <div class="phase-title">
+                        <i class="fas fa-seedling phase-icon"></i>
+                        <span>Exp 1: Mitosis Simulation</span>
+                    </div>
+                    <p>Using colored strings to simulate chromosome movements during mitosis phases.</p>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 5px;">
+                        <small><i class="fas fa-info-circle" style="color: #bbdefb;"></i> Red = maternal, Yellow = paternal chromosomes</small>
+                    </div>
+                </div>
+                
+                <div class="phase-card">
+                    <div class="phase-title">
+                        <i class="fas fa-onion phase-icon"></i>
+                        <span>Exp 2: Onion Root Tip Mitosis</span>
+                    </div>
+                    <p>Staining and observing mitotic stages in <em>Allium cepa</em> (onion) root tips.</p>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 5px;">
+                        <small><i class="fas fa-info-circle" style="color: #bbdefb;"></i> Apical meristem = region of active cell division</small>
+                    </div>
+                </div>
+                
+                <div class="phase-card">
+                    <div class="phase-title">
+                        <i class="fas fa-dna phase-icon"></i>
+                        <span>Exp 3: Meiosis Simulation</span>
+                    </div>
+                    <p>Simulating chromosome replication and movement during meiosis I and II.</p>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 5px;">
+                        <small><i class="fas fa-info-circle" style="color: #bbdefb;"></i> Includes crossing-over simulation</small>
+                    </div>
+                </div>
+                
+                <div class="phase-card">
+                    <div class="phase-title">
+                        <i class="fas fa-flower phase-icon"></i>
+                        <span>Exp 4: Lily Anther Meiosis</span>
+                    </div>
+                    <p>Observing meiotic stages in prepared slides of <em>Lilium</em> anthers.</p>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 5px;">
+                        <small><i class="fas fa-info-circle" style="color: #bbdefb;"></i> Pollen tetrads = result of meiosis</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mitosis-demo" id="mitosisAnimation">
+                <!-- Mitosis animation will be added via JavaScript -->
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button id="startMitosisBtn" style="padding: 10px 20px; background: var(--mitosis-blue); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                    <i class="fas fa-play"></i> Start Mitosis Animation
+                </button>
+                <button id="resetMitosisBtn" style="padding: 10px 20px; background: var(--meiosis-purple); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-left: 10px;">
+                    <i class="fas fa-redo"></i> Reset
+                </button>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2><i class="fas fa-layer-group"></i> Mitosis Stages in Detail</h2>
+            
+            <div class="stage-visual">
+                <div class="stage" style="border-color: var(--interphase-green);">
+                    <div style="font-size: 2rem; color: var(--interphase-green);">
+                        <i class="fas fa-circle"></i>
+                    </div>
+                    <div style="margin-top: 10px; font-weight: bold; color: #a5d6a7;">Interphase</div>
+                    <div style="font-size: 0.8rem; text-align: center;">DNA replication</div>
+                </div>
+                
+                <div class="stage" style="border-color: #ff9800;">
+                    <div style="font-size: 2rem; color: #ff9800;">
+                        <i class="fas fa-compress-arrows-alt"></i>
+                    </div>
+                    <div style="margin-top: 10px; font-weight: bold; color: #ffcc80;">Prophase</div>
+                    <div style="font-size: 0.8rem; text-align: center;">Chromosomes condense</div>
+                </div>
+                
+                <div class="stage" style="border-color: #ff5722;">
+                    <div style="font-size: 2rem; color: #ff5722;">
+                        <i class="fas fa-align-center"></i>
+                    </div>
+                    <div style="margin-top: 10px; font-weight: bold; color: #ffab91;">Metaphase</div>
+                    <div style="font-size: 0.8rem; text-align: center;">Alignment at plate</div>
+                </div>
+                
+                <div class="stage" style="border-color: #e91e63;">
+                    <div style="font-size: 2rem; color: #e91e63;">
+                        <i class="fas fa-arrows-alt-h"></i>
+                    </div>
+                    <div style="margin-top: 10px; font-weight: bold; color: #f48fb1;">Anaphase</div>
+                    <div style="font-size: 0.8rem; text-align: center;">Chromatids separate</div>
+                </div>
+                
+                <div class="stage" style="border-color: #9c27b0;">
+                    <div style="font-size: 2rem; color: #9c27b0;">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </div>
+                    <div style="margin-top: 10px; font-weight: bold; color: #ce93d8;">Telophase</div>
+                    <div style="font-size: 0.8rem; text-align: center;">Nuclear reform</div>
+                </div>
+                
+                <div class="stage" style="border-color: #673ab7;">
+                    <div style="font-size: 2rem; color: #673ab7;">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <div style="margin-top: 10px; font-weight: bold; color: #b39ddb;">Cytokinesis</div>
+                    <div style="font-size: 0.8rem; text-align: center;">Cytoplasm divides</div>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <h4><i class="fas fa-lightbulb" style="color: #ffd600;"></i> Key Differences in Plant vs Animal Mitosis</h4>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Plant cells:</strong> Form cell plate during cytokinesis (no cleavage furrow)</li>
+                    <li><strong>Animal cells:</strong> Form cleavage furrow during cytokinesis</li>
+                    <li><strong>Plant cells:</strong> Centrosomes absent; spindle forms from microtubule organizing centers</li>
+                    <li><strong>Animal cells:</strong> Centrosomes with centrioles present</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2><i class="fas fa-random"></i> Genetic Diversity in Meiosis</h2>
+            
+            <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; margin: 30px 0;">
+                <div style="text-align: center; background: rgba(142, 36, 170, 0.2); padding: 20px; border-radius: 10px; width: 300px;">
+                    <div style="font-size: 3rem; color: #e91e63; margin-bottom: 15px;">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h4 style="color: #ce93d8;">Crossing Over</h4>
+                    <p>Exchange of genetic material between homologous chromosomes during Prophase I</p>
+                </div>
+                
+                <div style="text-align: center; background: rgba(21, 101, 192, 0.2); padding: 20px; border-radius: 10px; width: 300px;">
+                    <div style="font-size: 3rem; color: #2196f3; margin-bottom: 15px;">
+                        <i class="fas fa-random"></i>
+                    </div>
+                    <h4 style="color: #90caf9;">Independent Assortment</h4>
+                    <p>Random alignment of homologous pairs at Metaphase I creates 2²³ possible combinations in humans</p>
+                </div>
+                
+                <div style="text-align: center; background: rgba(67, 160, 71, 0.2); padding: 20px; border-radius: 10px; width: 300px;">
+                    <div style="font-size: 3rem; color: #4caf50; margin-bottom: 15px;">
+                        <i class="fas fa-sperm"></i><i class="fas fa-egg" style="margin-left: 10px;"></i>
+                    </div>
+                    <h4 style="color: #a5d6a7;">Random Fertilization</h4>
+                    <p>Any sperm can fertilize any egg, further increasing genetic diversity</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <p><strong>Result:</strong> Each human gamete is genetically unique. With 23 chromosome pairs, meiosis can produce over 8 million (2²³) different chromosome combinations!</p>
+            </div>
+        </section>
+        
+        <div class="practical-nav">
+            <a href="#" class="nav-btn">
+                <i class="fas fa-arrow-left"></i> Previous: Practical 9
+            </a>
+            <a href="#" class="nav-btn">
+                Next: Practical 11 <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        
+        <footer>
+            <p><i class="fas fa-dna"></i> BIOL 2101: General Biology I | Sultan Qaboos University</p>
+            <p>Laboratory Manual - Practical 10: Mitosis and Meiosis in Cells</p>
+            <p style="margin-top: 15px; color: #e1bee7;">Interactive Cell Division Simulation with Chromosome Animations</p>
+        </footer>
+    </div>
+
+    <script>
+        // Create mitosis animation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add more floating chromosomes
+            for (let i = 0; i < 15; i++) {
+                const chromosome = document.createElement('div');
+                chromosome.className = 'chromosome';
+                chromosome.style.top = `${Math.random() * 100}%`;
+                chromosome.style.left = `${Math.random() * 100}%`;
+                chromosome.style.animationDelay = `${Math.random() * 15}s`;
+                chromosome.style.transform = `scale(${0.7 + Math.random() * 0.6})`;
+                document.querySelector('.container').appendChild(chromosome);
+            }
+            
+            // Add more floating chromatids
+            for (let i = 0; i < 10; i++) {
+                const chromatid = document.createElement('div');
+                chromatid.className = 'chromatid';
+                chromatid.style.top = `${Math.random() * 100}%`;
+                chromatid.style.left = `${Math.random() * 100}%`;
+                chromatid.style.animationDelay = `${Math.random() * 12}s`;
+                chromatid.style.background = i % 2 === 0 ? 'var(--chromosome-red)' : 'var(--chromosome-blue)';
+                chromatid.style.width = `${10 + Math.random() * 20}px`;
+                chromatid.style.height = `${30 + Math.random() * 40}px`;
+                document.querySelector('.container').appendChild(chromatid);
+            }
+            
+            // Create mitosis animation
+            const mitosisDemo = document.getElementById('mitosisAnimation');
+            
+            // Create parent cell
+            const parentCell = document.createElement('div');
+            parentCell.className = 'cell';
+            parentCell.id = 'parentCell';
+            parentCell.style.margin = '0 auto';
+            
+            // Add chromosome pairs
+            for (let i = 0; i < 3; i++) {
+                const pair = document.createElement('div');
+                pair.className = 'chromosome-pair';
+                pair.id = `pair${i}`;
+                pair.style.top = `${30 + i * 25}px`;
+                pair.style.left = '40px';
+                
+                const centromere = document.createElement('div');
+                centromere.className = 'centromere';
+                centromere.style.top = '1px';
+                centromere.style.left = '16px';
+                
+                pair.appendChild(centromere);
+                parentCell.appendChild(pair);
+            }
+            
+            mitosisDemo.appendChild(parentCell);
+            
+            // Animation variables
+            let animationStep = 0;
+            let animationInterval;
+            
+            // Animation steps
+            const animationSteps = [
+                // Interphase
+                () => {
+                    document.getElementById('parentCell').style.borderColor = 'var(--interphase-green)';
+                    document.querySelectorAll('.chromosome-pair').forEach(pair => {
+                        pair.style.width = '40px';
+                        pair.style.height = '10px';
+                        pair.style.left = '40px';
+                    });
+                },
+                // Prophase
+                () => {
+                    document.getElementById('parentCell').style.borderColor = '#ff9800';
+                    document.querySelectorAll('.chromosome-pair').forEach(pair => {
+                        pair.style.width = '10px';
+                        pair.style.height = '40px';
+                        pair.style.left = '40px';
+                    });
+                    
+                    // Add spindle fibers
+                    for (let i = 0; i < 3; i++) {
+                        const fiber = document.createElement('div');
+                        fiber.className = 'spindle-fiber';
+                        fiber.id = `fiber${i}`;
+                        fiber.style.top = `${40 + i * 25}px`;
+                        fiber.style.left = '60px';
+                        fiber.style.width = '40px';
+                        fiber.style.transform = 'rotate(30deg)';
+                        parentCell.appendChild(fiber);
+                    }
+                },
+                // Metaphase
+                () => {
+                    document.getElementById('parentCell').style.borderColor = '#ff5722';
+                    document.querySelectorAll('.chromosome-pair').forEach((pair, i) => {
+                        pair.style.left = '55px';
+                        pair.style.top = `${30 + i * 25}px`;
+                    });
+                },
+                // Anaphase
+                () => {
+                    document.getElementById('parentCell').style.borderColor = '#e91e63';
+                    document.querySelectorAll('.chromosome-pair').forEach((pair, i) => {
+                        // Split chromosome into chromatids
+                        pair.style.width = '5px';
+                        pair.style.height = '40px';
+                        
+                        // Create sister chromatids moving apart
+                        const leftChromatid = pair.cloneNode(true);
+                        leftChromatid.id = `leftChromatid${i}`;
+                        leftChromatid.style.left = '30px';
+                        leftChromatid.style.background = 'var(--chromosome-red)';
+                        
+                        const rightChromatid = pair.cloneNode(true);
+                        rightChromatid.id = `rightChromatid${i}`;
+                        rightChromatid.style.left = '80px';
+                        rightChromatid.style.background = 'var(--chromosome-blue)';
+                        
+                        parentCell.appendChild(leftChromatid);
+                        parentCell.appendChild(rightChromatid);
+                        
+                        // Hide original pair
+                        pair.style.opacity = '0';
+                    });
+                },
+                // Telophase/Cytokinesis
+                () => {
+                    document.getElementById('parentCell').style.borderColor = '#9c27b0';
+                    
+                    // Create two daughter cells
+                    const daughterCell1 = parentCell.cloneNode(true);
+                    daughterCell1.id = 'daughterCell1';
+                    daughterCell1.style.position = 'absolute';
+                    daughterCell1.style.left = '50px';
+                    daughterCell1.style.top = '50px';
+                    daughterCell1.style.transform = 'scale(0.8)';
+                    daughterCell1.style.borderColor = 'var(--interphase-green)';
+                    
+                    const daughterCell2 = parentCell.cloneNode(true);
+                    daughterCell2.id = 'daughterCell2';
+                    daughterCell2.style.position = 'absolute';
+                    daughterCell2.style.left = '200px';
+                    daughterCell2.style.top = '50px';
+                    daughterCell2.style.transform = 'scale(0.8)';
+                    daughterCell2.style.borderColor = 'var(--interphase-green)';
+                    
+                    // Clear mitosisDemo and add daughter cells
+                    mitosisDemo.innerHTML = '';
+                    mitosisDemo.appendChild(daughterCell1);
+                    mitosisDemo.appendChild(daughterCell2);
+                    
+                    // Add labels
+                    const label1 = document.createElement('div');
+                    label1.style.position = 'absolute';
+                    label1.style.left = '80px';
+                    label1.style.top = '180px';
+                    label1.style.color = '#bbdefb';
+                    label1.style.fontWeight = 'bold';
+                    label1.textContent = '2n';
+                    mitosisDemo.appendChild(label1);
+                    
+                    const label2 = document.createElement('div');
+                    label2.style.position = 'absolute';
+                    label2.style.left = '230px';
+                    label2.style.top = '180px';
+                    label2.style.color = '#bbdefb';
+                    label2.style.fontWeight = 'bold';
+                    label2.textContent = '2n';
+                    mitosisDemo.appendChild(label2);
+                }
+            ];
+            
+            // Start animation button
+            document.getElementById('startMitosisBtn').addEventListener('click', function() {
+                if (animationInterval) {
+                    clearInterval(animationInterval);
+                }
+                
+                animationStep = 0;
+                
+                // Reset animation
+                mitosisDemo.innerHTML = '';
+                mitosisDemo.appendChild(parentCell);
+                
+                // Restore chromosome pairs
+                for (let i = 0; i < 3; i++) {
+                    const pair = document.createElement('div');
+                    pair.className = 'chromosome-pair';
+                    pair.id = `pair${i}`;
+                    pair.style.top = `${30 + i * 25}px`;
+                    pair.style.left = '40px';
+                    pair.style.width = '40px';
+                    pair.style.height = '10px';
+                    pair.style.opacity = '1';
+                    pair.style.background = 'linear-gradient(to right, var(--chromosome-red), var(--chromosome-blue))';
+                    
+                    const centromere = document.createElement('div');
+                    centromere.className = 'centromere';
+                    centromere.style.top = '1px';
+                    centromere.style.left = '16px';
+                    
+                    pair.appendChild(centromere);
+                    parentCell.appendChild(pair);
+                }
+                
+                // Start animation sequence
+                animationInterval = setInterval(() => {
+                    if (animationStep < animationSteps.length) {
+                        animationSteps[animationStep]();
+                        animationStep++;
+                    } else {
+                        clearInterval(animationInterval);
+                    }
+                }, 1500);
+            });
+            
+            // Reset button
+            document.getElementById('resetMitosisBtn').addEventListener('click', function() {
+                if (animationInterval) {
+                    clearInterval(animationInterval);
+                }
+                
+                animationStep = 0;
+                
+                // Reset to initial state
+                mitosisDemo.innerHTML = '';
+                mitosisDemo.appendChild(parentCell);
+                
+                // Restore chromosome pairs
+                for (let i = 0; i < 3; i++) {
+                    const pair = document.createElement('div');
+                    pair.className = 'chromosome-pair';
+                    pair.id = `pair${i}`;
+                    pair.style.top = `${30 + i * 25}px`;
+                    pair.style.left = '40px';
+                    pair.style.width = '40px';
+                    pair.style.height = '10px';
+                    pair.style.opacity = '1';
+                    pair.style.background = 'linear-gradient(to right, var(--chromosome-red), var(--chromosome-blue))';
+                    
+                    const centromere = document.createElement('div');
+                    centromere.className = 'centromere';
+                    centromere.style.top = '1px';
+                    centromere.style.left = '16px';
+                    
+                    pair.appendChild(centromere);
+                    parentCell.appendChild(pair);
+                }
+                
+                document.getElementById('parentCell').style.borderColor = 'var(--interphase-green)';
+            });
+            
+            // Interactive phase dots
+            const phaseDots = document.querySelectorAll('.phase-dot');
+            phaseDots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const phase = this.textContent.trim();
+                    alert(`Phase Selected: ${phase}\n\n${this.getAttribute('title')}`);
+                });
+            });
+            
+            // Interactive hover effects for phase cards
+            const phaseCards = document.querySelectorAll('.phase-card');
+            phaseCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    const icon = this.querySelector('.phase-icon');
+                    if (icon) {
+                        icon.style.transform = 'scale(1.3) rotate(10deg)';
+                        icon.style.transition = 'transform 0.3s ease';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    const icon = this.querySelector('.phase-icon');
+                    if (icon) {
+                        icon.style.transform = 'scale(1) rotate(0deg)';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

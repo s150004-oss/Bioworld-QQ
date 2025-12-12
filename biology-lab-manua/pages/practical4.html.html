@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIOL 2101: Practical 4 - Diversity of Bacteria</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #e8f4f8;
+            color: #2c3e50;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 20% 80%, #d1ecf1 0%, transparent 20%),
+                radial-gradient(circle at 80% 20%, #d6eaf8 0%, transparent 20%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
+            color: white;
+            padding: 30px 0;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233498db' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.1;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .bacteria-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .content-section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .section-title {
+            color: #2980b9;
+            border-bottom: 2px solid #d6eaf8;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            font-size: 1.5rem;
+        }
+        
+        .bacteria-animation {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .animation-container {
+            width: 100%;
+            height: 350px;
+            position: relative;
+            background: linear-gradient(180deg, #1a5276 0%, #2c3e50 100%);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .microscope-view {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            border: 2px solid #3498db;
+        }
+        
+        .microscope-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #34495e 0%, #2c3e50 70%);
+            border: 3px solid #3498db;
+            overflow: hidden;
+        }
+        
+        .bacteria {
+            position: absolute;
+            border-radius: 50%;
+            transition: all 0.5s ease;
+        }
+        
+        .coccus {
+            width: 15px;
+            height: 15px;
+            background-color: #e74c3c;
+            animation: float 6s infinite ease-in-out;
+        }
+        
+        .bacillus {
+            width: 25px;
+            height: 8px;
+            background-color: #2ecc71;
+            border-radius: 4px;
+            animation: float 8s infinite ease-in-out;
+        }
+        
+        .spirillum {
+            width: 30px;
+            height: 30px;
+            background-color: transparent;
+            border: 3px solid #9b59b6;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: spin 10s infinite linear;
+        }
+        
+        .staphylococcus {
+            position: absolute;
+            display: flex;
+            flex-wrap: wrap;
+            width: 40px;
+            height: 40px;
+            top: 30px;
+            left: 30px;
+        }
+        
+        .staph-cell {
+            width: 10px;
+            height: 10px;
+            background-color: #e74c3c;
+            border-radius: 50%;
+            margin: 1px;
+        }
+        
+        .streptococcus {
+            position: absolute;
+            display: flex;
+            top: 80px;
+            left: 100px;
+        }
+        
+        .strep-cell {
+            width: 12px;
+            height: 12px;
+            background-color: #f39c12;
+            border-radius: 50%;
+            margin-right: 2px;
+        }
+        
+        .oil-immersion {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(52, 152, 219, 0.3) 0%, transparent 70%);
+            animation: oil-pulse 4s infinite alternate;
+        }
+        
+        .gram-stain {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            height: 40px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        .gram-positive {
+            width: 20px;
+            height: 20px;
+            background-color: #8e44ad;
+            border-radius: 50%;
+            animation: stain-purple 3s infinite alternate;
+        }
+        
+        .gram-negative {
+            width: 20px;
+            height: 20px;
+            background-color: #e74c3c;
+            border-radius: 50%;
+            animation: stain-red 3s infinite alternate;
+        }
+        
+        .bacteria-controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .bacteria-btn {
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .bacteria-btn:hover {
+            background-color: #2471a3;
+        }
+        
+        .instructions {
+            background-color: #ebf5fb;
+            border-left: 4px solid #5dade2;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .instructions h4 {
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+        
+        ul, ol {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .objectives-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .objective-item {
+            background-color: #ebf5fb;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 3px solid #2980b9;
+        }
+        
+        .objective-item i {
+            color: #2980b9;
+            margin-right: 10px;
+        }
+        
+        .bacteria-types {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .bacteria-card {
+            flex: 1;
+            min-width: 200px;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border-top: 4px solid;
+        }
+        
+        .cocci-card {
+            border-top-color: #e74c3c;
+        }
+        
+        .bacilli-card {
+            border-top-color: #2ecc71;
+        }
+        
+        .spirilla-card {
+            border-top-color: #9b59b6;
+        }
+        
+        .bacteria-card h4 {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .bacteria-card p {
+            font-size: 0.9rem;
+        }
+        
+        .shape-comparison {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .shape-item {
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .shape-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #ebf5fb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 1.5rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #2980b9;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .staining-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #ebf5fb;
+            border-radius: 5px;
+        }
+        
+        .step-number {
+            background-color: #2980b9;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .gram-stain-diagram {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            align-items: center;
+        }
+        
+        .gram-positive-cell, .gram-negative-cell {
+            width: 45%;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .gram-positive-cell {
+            background-color: #f3e5f5;
+            border: 2px solid #8e44ad;
+        }
+        
+        .gram-negative-cell {
+            background-color: #ffebee;
+            border: 2px solid #e74c3c;
+        }
+        
+        .cell-wall {
+            width: 100px;
+            height: 60px;
+            margin: 10px auto;
+            position: relative;
+        }
+        
+        .gram-positive-wall {
+            background-color: #8e44ad;
+            border-radius: 5px;
+            position: relative;
+        }
+        
+        .gram-positive-wall:after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            background-color: #9b59b6;
+            border-radius: 3px;
+        }
+        
+        .gram-negative-wall {
+            background-color: #e74c3c;
+            border-radius: 5px;
+            position: relative;
+        }
+        
+        .gram-negative-wall:before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background-color: #c0392b;
+            border-radius: 3px 3px 0 0;
+        }
+        
+        .gram-negative-wall:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background-color: #c0392b;
+            border-radius: 0 0 3px 3px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid #d6eaf8;
+            color: #2980b9;
+            font-size: 0.9rem;
+        }
+        
+        .highlight {
+            background-color: #d6eaf8;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            50% { transform: translateY(0) translateX(20px); }
+            75% { transform: translateY(20px) translateX(10px); }
+            100% { transform: translateY(0) translateX(0); }
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes oil-pulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.6; }
+        }
+        
+        @keyframes stain-purple {
+            0% { transform: scale(1); background-color: #8e44ad; }
+            100% { transform: scale(1.2); background-color: #9b59b6; }
+        }
+        
+        @keyframes stain-red {
+            0% { transform: scale(1); background-color: #e74c3c; }
+            100% { transform: scale(1.2); background-color: #c0392b; }
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .bacteria-icon {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin: 15px auto;
+            }
+            
+            .animation-container {
+                height: 250px;
+            }
+            
+            .bacteria-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .bacteria-btn {
+                width: 80%;
+            }
+            
+            .gram-stain-diagram {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .gram-positive-cell, .gram-negative-cell {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>BIOL 2101: General Biology I</h1>
+            <p>Practical 4: Diversity of Bacteria (Prokaryotic Cells)</p>
+            <p>Sultan Qaboos University | Department of Biology</p>
+            <div class="bacteria-icon">
+                <i class="fas fa-bacterium"></i>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="content-section">
+                <h2 class="section-title"><i class="fas fa-bullseye"></i> Introduction to Bacteria</h2>
+                <p>Bacteria are <span class="highlight">prokaryotic cells</span> lacking membrane-bound organelles. They are simple compared to eukaryotic cells but exhibit remarkable diversity in shape, size, and metabolism.</p>
+                
+                <div class="objectives-list">
+                    <div class="objective-item">
+                        <i class="fas fa-shapes"></i> Examine bacterial morphology (shapes & arrangements)
+                    </div>
+                    <div class="objective-item">
+                        <i class="fas fa-palette"></i> Perform Gram staining technique
+                    </div>
+                    <div class="objective-item">
+                        <i class="fas fa-microscope"></i> Use oil immersion microscopy (100X)
+                    </div>
+                    <div class="objective-item">
+                        <i class="fas fa-utensils"></i> Isolate bacteria from yogurt
+                    </div>
+                </div>
+                
+                <div class="instructions">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Special Considerations for Bacteria Observation</h4>
+                    <ul>
+                        <li><strong>Size:</strong> Bacteria are small (0.5-5μm) - similar to wavelength of visible light</li>
+                        <li><strong>Color:</strong> Most are colorless with refractive index greater than water</li>
+                        <li><strong>Microscopy:</strong> Require oil immersion objectives for sufficient resolution</li>
+                        <li><strong>Staining:</strong> Need staining to visualize under light microscope</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="bacteria-animation">
+                <h2 class="section-title"><i class="fas fa-play-circle"></i> Bacterial Diversity Animation</h2>
+                <p>Observe different bacterial shapes and structures under simulated oil immersion microscopy (100X).</p>
+                
+                <div class="animation-container">
+                    <div class="microscope-view">
+                        <div class="microscope-circle">
+                            <div class="oil-immersion"></div>
+                            
+                            <div class="staphylococcus">
+                                <div class="staph-cell"></div>
+                                <div class="staph-cell"></div>
+                                <div class="staph-cell"></div>
+                                <div class="staph-cell"></div>
+                                <div class="staph-cell"></div>
+                                <div class="staph-cell"></div>
+                            </div>
+                            
+                            <div class="streptococcus">
+                                <div class="strep-cell"></div>
+                                <div class="strep-cell"></div>
+                                <div class="strep-cell"></div>
+                                <div class="strep-cell"></div>
+                                <div class="strep-cell"></div>
+                            </div>
+                            
+                            <div class="bacteria coccus" style="top: 120px; left: 150px;"></div>
+                            <div class="bacteria bacillus" style="top: 60px; left: 80px;"></div>
+                            <div class="bacteria spirillum" style="top: 140px; left: 60px;"></div>
+                            <div class="bacteria coccus" style="top: 80px; left: 180px;"></div>
+                            <div class="bacteria bacillus" style="top: 160px; left: 120px;"></div>
+                        </div>
+                        
+                        <div class="gram-stain">
+                            <div class="gram-positive"></div>
+                            <span style="color: white; font-size: 0.8rem;">Gram-positive (Purple)</span>
+                            <div class="gram-negative"></div>
+                            <span style="color: white; font-size: 0.8rem;">Gram-negative (Red)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="animation-description">Simulated oil immersion view showing: <span class="highlight">Cocci</span> (spherical), <span class="highlight">Bacilli</span> (rod-shaped), <span class="highlight">Spirilla</span> (spiral), and different arrangements.</p>
+                
+                <div class="bacteria-controls">
+                    <button class="bacteria-btn" id="showCocci">
+                        <i class="fas fa-circle"></i> Cocci
+                    </button>
+                    <button class="bacteria-btn" id="showBacilli">
+                        <i class="fas fa-minus"></i> Bacilli
+                    </button>
+                    <button class="bacteria-btn" id="showGramStain">
+                        <i class="fas fa-palette"></i> Gram Stain
+                    </button>
+                    <button class="bacteria-btn" id="showAllBacteria">
+                        <i class="fas fa-bacteria"></i> Show All
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="section-title"><i class="fas fa-shapes"></i> Experiment A: Bacterial Cell Shapes</h2>
+            
+            <h3><i class="fas fa-bullseye"></i> Objective</h3>
+            <p>To examine the morphology of bacterial cells based on their shape, size, and arrangement.</p>
+            
+            <h3><i class="fas fa-flask"></i> Materials</h3>
+            <ul>
+                <li>Prepared slides of: <em>Staphylococcus, Streptococcus, Bacillus, Spirilla</em></li>
+                <li>Microscope with oil immersion lens (100X)</li>
+                <li>Immersion oil</li>
+            </ul>
+            
+            <div class="bacteria-types">
+                <div class="bacteria-card cocci-card">
+                    <h4><i class="fas fa-circle"></i> Cocci</h4>
+                    <p>Spherical bacteria. Arrangements: singles, diplococci, streptococci (chains), staphylococci (clusters).</p>
+                </div>
+                <div class="bacteria-card bacilli-card">
+                    <h4><i class="fas fa-minus"></i> Bacilli</h4>
+                    <p>Rod-shaped bacteria. Can be single or in chains (streptobacilli). Some are short (coccobacilli).</p>
+                </div>
+                <div class="bacteria-card spirilla-card">
+                    <h4><i class="fas fa-wave-square"></i> Spirilla</h4>
+                    <p>Spiral-shaped bacteria. Includes spirilla (rigid) and spirochetes (flexible).</p>
+                </div>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Bacterial Shape</th>
+                        <th>Examples</th>
+                        <th>Arrangements</th>
+                        <th>Size Range</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Cocci (Spherical)</strong></td>
+                        <td><em>Staphylococcus, Streptococcus</em></td>
+                        <td>Singles, pairs, chains, clusters, tetrads</td>
+                        <td>0.5-1.0 μm diameter</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bacilli (Rod-shaped)</strong></td>
+                        <td><em>Bacillus, Escherichia coli</em></td>
+                        <td>Singles, pairs, chains</td>
+                        <td>0.5-1.0 × 1-10 μm</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Spirilla (Spiral)</strong></td>
+                        <td><em>Spirillum, Treponema</em></td>
+                        <td>Usually single cells</td>
+                        <td>0.1-1.0 × 5-250 μm</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vibrios (Comma-shaped)</strong></td>
+                        <td><em>Vibrio cholerae</em></td>
+                        <td>Singles or pairs</td>
+                        <td>0.5 × 1.5-3.0 μm</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="instructions">
+                <h4><i class="fas fa-lightbulb"></i> Oil Immersion Technique</h4>
+                <ol>
+                    <li>First focus under 40X objective</li>
+                    <li>Half rotate the objective so no lens is in position</li>
+                    <li>Put a drop of immersion oil on the slide</li>
+                    <li>Complete rotation to 100X objective position</li>
+                    <li>Refocus using <strong>FINE FOCUS ONLY</strong> (never use coarse focus with 100X)</li>
+                    <li>Clean oil from lens with lens paper after use</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="section-title"><i class="fas fa-palette"></i> Experiment B: Gram Staining of Bacteria</h2>
+            
+            <h3><i class="fas fa-bullseye"></i> Objective</h3>
+            <p>To perform Gram staining technique and differentiate bacteria into Gram-positive and Gram-negative groups.</p>
+            
+            <div class="gram-stain-diagram">
+                <div class="gram-positive-cell">
+                    <h4>Gram-Positive</h4>
+                    <div class="cell-wall gram-positive-wall"></div>
+                    <p>Thick peptidoglycan layer<br>Retains crystal violet stain<br>Appears <strong>purple/violet</strong></p>
+                </div>
+                
+                <div class="gram-negative-cell">
+                    <h4>Gram-Negative</h4>
+                    <div class="cell-wall gram-negative-wall"></div>
+                    <p>Thin peptidoglycan + outer membrane<br>Loses crystal violet, takes up safranin<br>Appears <strong>red/pink</strong></p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-list-ol"></i> Gram Staining Procedure</h3>
+            <div class="staining-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div><strong>Heat fix:</strong> Make thin bacterial smear, air dry, pass through flame 3 times</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div><strong>Crystal violet:</strong> Stain for 1 minute, wash with water</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div><strong>Gram's iodine:</strong> Flood with iodine for 1 minute (forms CV-I complex)</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div><strong>Decolorize:</strong> 95% alcohol for 30-60 seconds (CRITICAL STEP)</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div><strong>Counterstain:</strong> Safranin for 1 minute, wash, air dry</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <div><strong>Observe:</strong> Under oil immersion (100X)</div>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-exclamation-triangle"></i> Safety Precautions</h3>
+            <ul>
+                <li>Disinfect working area with alcohol before and after</li>
+                <li>Incinerate inoculation loop before and after use</li>
+                <li>Wash hands with disinfectant after handling bacteria</li>
+                <li>Keep petri dishes closed when not in use</li>
+                <li>Dispose of materials properly</li>
+            </ul>
+            
+            <div class="instructions">
+                <h4><i class="fas fa-lightbulb"></i> Gram Stain Interpretation</h4>
+                <ul>
+                    <li><strong>Gram-positive:</strong> Dark violet/purple (e.g., <em>Staphylococcus aureus, Bacillus subtilis</em>)</li>
+                    <li><strong>Gram-negative:</strong> Red/pink (e.g., <em>Escherichia coli, Pseudomonas, Rhizobium</em>)</li>
+                    <li><strong>Gram-variable:</strong> Some cells stain differently in same culture (common in older cultures)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="section-title"><i class="fas fa-utensils"></i> Experiment C: Bacteria from Yogurt</h2>
+            
+            <h3><i class="fas fa-bullseye"></i> Objective</h3>
+            <p>To stain and identify <em>Lactobacillus</em> and <em>Streptococcus</em> bacteria in yogurt.</p>
+            
+            <h3><i class="fas fa-info-circle"></i> Background</h3>
+            <p>Yogurt is produced by fermentation of milk by lactic acid bacteria: <em>Lactobacillus bulgaricus</em> and <em>Streptococcus thermophilus</em>. These convert lactose to lactic acid, which thickens milk and inhibits spoilage organisms.</p>
+            
+            <div class="shape-comparison">
+                <div class="shape-item">
+                    <div class="shape-icon" style="color: #8e44ad;">
+                        <i class="fas fa-minus"></i>
+                    </div>
+                    <p><strong>Lactobacillus</strong><br>Rod-shaped (bacilli)<br>Gram-positive</p>
+                </div>
+                <div class="shape-item">
+                    <div class="shape-icon" style="color: #8e44ad;">
+                        <i class="fas fa-circle"></i>
+                    </div>
+                    <p><strong>Streptococcus</strong><br>Spherical (cocci)<br>In chains<br>Gram-positive</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-question-circle"></i> Questions to Answer</h3>
+            <ol>
+                <li>Are these bacteria harmful or useful?</li>
+                <li>Are you going to be infected by these bacteria if you eat yogurt containing bacteria? Why?</li>
+                <li>Can you prepare yogurt without bacteria? How?</li>
+            </ol>
+            
+            <div class="instructions">
+               

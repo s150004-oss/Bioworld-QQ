@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 7: Biological Molecules in Foods</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #2e7d32;
+            --secondary: #388e3c;
+            --accent: #81c784;
+            --dark-bg: #1a2a1e;
+            --light-bg: #e8f5e9;
+            --text-light: #f1f8e9;
+            --text-dark: #1b5e20;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--dark-bg), #263238);
+            color: var(--text-light);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(129, 199, 132, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%232e7d32' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid var(--accent);
+            position: relative;
+        }
+        
+        .title-icon {
+            font-size: 4rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: float 6s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(129, 199, 132, 0.7);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        h1 {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+            text-shadow: 0 0 15px rgba(129, 199, 132, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            color: #c8e6c9;
+            margin-bottom: 25px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .objective-box {
+            background: rgba(56, 142, 60, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 5px solid var(--accent);
+            transition: transform 0.3s ease;
+        }
+        
+        .objective-box:hover {
+            transform: translateX(10px);
+        }
+        
+        .molecule {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.7;
+            animation: moleculeFloat 20s linear infinite;
+            z-index: 0;
+        }
+        
+        @keyframes moleculeFloat {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(129, 199, 132, 0.1);
+        }
+        
+        .section:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        h2 {
+            color: var(--accent);
+            margin-bottom: 25px;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        h2 i {
+            color: #a5d6a7;
+            background: rgba(56, 142, 60, 0.2);
+            padding: 12px;
+            border-radius: 50%;
+        }
+        
+        .test-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+        
+        .test-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid var(--accent);
+        }
+        
+        .test-card:hover {
+            background: rgba(129, 199, 132, 0.15);
+            transform: scale(1.03);
+        }
+        
+        .test-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #a5d6a7;
+            font-size: 1.4rem;
+        }
+        
+        .test-icon {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+        
+        .food-sample {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        
+        .food-icon {
+            font-size: 1.8rem;
+            color: #ffcc80;
+        }
+        
+        .reaction-demo {
+            height: 120px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .color-change {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 0 20px;
+            transition: all 2s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 25px 0;
+            border-radius: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: rgba(56, 142, 60, 0.4);
+            color: #c8e6c9;
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        tr:hover {
+            background: rgba(129, 199, 132, 0.1);
+        }
+        
+        .positive {
+            color: #c8e6c9;
+            background: rgba(76, 175, 80, 0.3);
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        
+        .negative {
+            color: #ffab91;
+            background: rgba(244, 67, 54, 0.3);
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        
+        .animation-area {
+            height: 200px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .enzyme {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #ff9800;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            z-index: 2;
+            animation: enzymeMove 8s infinite linear;
+        }
+        
+        .substrate {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #2196f3;
+            border-radius: 50%;
+            animation: substrateMove 10s infinite linear;
+        }
+        
+        @keyframes enzymeMove {
+            0% { transform: translateX(-100px) rotate(0deg); }
+            50% { transform: translateX(100px) rotate(180deg); }
+            100% { transform: translateX(-100px) rotate(360deg); }
+        }
+        
+        @keyframes substrateMove {
+            0% { transform: translateX(100px) translateY(0); }
+            50% { transform: translateX(-100px) translateY(50px); }
+            100% { transform: translateX(100px) translateY(0); }
+        }
+        
+        .conclusion-box {
+            background: rgba(56, 142, 60, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 40px;
+            border-left: 5px solid #ff9800;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(129, 199, 132, 0.3);
+            color: #a5d6a7;
+            font-size: 0.95rem;
+        }
+        
+        .practical-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+        }
+        
+        .nav-btn {
+            padding: 12px 25px;
+            background: rgba(56, 142, 60, 0.3);
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-btn:hover {
+            background: var(--accent);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 992px) {
+            h1 { font-size: 2.5rem; }
+            .test-container { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 25px; }
+            h1 { font-size: 2rem; }
+            .title-icon { font-size: 3rem; }
+            .test-container { grid-template-columns: 1fr; }
+            .practical-nav { flex-direction: column; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Animated molecules in background -->
+        <div class="molecule" style="top: 10%; left: 5%; animation-delay: 0s;"><i class="fas fa-atom"></i></div>
+        <div class="molecule" style="top: 20%; right: 8%; animation-delay: 2s;"><i class="fas fa-dna"></i></div>
+        <div class="molecule" style="top: 60%; left: 8%; animation-delay: 4s;"><i class="fas fa-vial"></i></div>
+        <div class="molecule" style="top: 80%; right: 10%; animation-delay: 6s;"><i class="fas fa-flask"></i></div>
+        
+        <header>
+            <div class="title-icon">
+                <i class="fas fa-utensils"></i>
+            </div>
+            <h1>Practical 7: Identification of Biological Molecules in Foods</h1>
+            <p class="subtitle">Applying biochemical tests to detect reducing sugars, starch, lipids, and proteins in various food samples</p>
+            <div class="objective-box">
+                <h3><i class="fas fa-bullseye"></i> Objective</h3>
+                <p>To apply knowledge of biochemical tests to identify specific classes of biological molecules present in common foods and understand their nutritional composition.</p>
+            </div>
+        </header>
+        
+        <section class="section">
+            <h2><i class="fas fa-list-ol"></i> Tests Overview</h2>
+            <p>This practical applies the biochemical tests learned in Practical 6 to real food samples. Four main tests are performed:</p>
+            
+            <div class="test-container">
+                <div class="test-card">
+                    <div class="test-title">
+                        <span>Test 1: Reducing Sugars</span>
+                        <i class="fas fa-candy-cane test-icon"></i>
+                    </div>
+                    <p>Using <strong>Benedict's reagent</strong> to detect reducing sugars in food extracts.</p>
+                    <div class="food-sample">
+                        <i class="fas fa-apple-alt food-icon"></i>
+                        <div>
+                            <strong>Samples tested:</strong>
+                            <div>Potato extract, Onion extract, Dates extract</div>
+                        </div>
+                    </div>
+                    <div class="reaction-demo">
+                        <div class="color-change" id="color1" style="background: #1e88e5;">Blue</div>
+                        <i class="fas fa-arrow-right" style="color: #81c784; font-size: 1.5rem;"></i>
+                        <div class="color-change" id="color2" style="background: #43a047;">Green</div>
+                        <i class="fas fa-arrow-right" style="color: #81c784; font-size: 1.5rem;"></i>
+                        <div class="color-change" id="color3" style="background: #e53935;">Red/Brown</div>
+                    </div>
+                    <p><strong>Positive result:</strong> Color change from blue to green/orange/red</p>
+                </div>
+                
+                <div class="test-card">
+                    <div class="test-title">
+                        <span>Test 2: Starch</span>
+                        <i class="fas fa-bread-slice test-icon"></i>
+                    </div>
+                    <p>Using <strong>Iodine solution</strong> to detect starch in food samples.</p>
+                    <div class="food-sample">
+                        <i class="fas fa-seedling food-icon"></i>
+                        <div>
+                            <strong>Samples tested:</strong>
+                            <div>Potato extract, Onion extract, Dates extract</div>
+                        </div>
+                    </div>
+                    <div class="reaction-demo">
+                        <div class="color-change" style="background: #ffd54f; color: #333;">Yellow</div>
+                        <i class="fas fa-arrow-right" style="color: #81c784; font-size: 1.5rem;"></i>
+                        <div class="color-change" style="background: #3949ab; color: white;">Blue-Black</div>
+                    </div>
+                    <p><strong>Positive result:</strong> Color change to blue-black</p>
+                </div>
+                
+                <div class="test-card">
+                    <div class="test-title">
+                        <span>Test 3: Lipids</span>
+                        <i class="fas fa-oil-can test-icon"></i>
+                    </div>
+                    <p>Using <strong>Sudan III dye</strong> to detect lipids on filter paper.</p>
+                    <div class="food-sample">
+                        <i class="fas fa-bacon food-icon"></i>
+                        <div>
+                            <strong>Samples tested:</strong>
+                            <div>Flour, Wheat germ, Coconut extract, Olive oil</div>
+                        </div>
+                    </div>
+                    <div class="reaction-demo">
+                        <div class="color-change" style="background: #fff; color: #333; border: 2px dashed #ccc;">Filter Paper</div>
+                        <i class="fas fa-arrow-right" style="color: #81c784; font-size: 1.5rem;"></i>
+                        <div class="color-change" style="background: #ff9800; color: white;">Orange Stain</div>
+                    </div>
+                    <p><strong>Positive result:</strong> Orange stain on filter paper</p>
+                </div>
+                
+                <div class="test-card">
+                    <div class="test-title">
+                        <span>Test 4: Proteins</span>
+                        <i class="fas fa-drumstick-bite test-icon"></i>
+                    </div>
+                    <p>Using <strong>Biuret reagent</strong> to detect proteins in food samples.</p>
+                    <div class="food-sample">
+                        <i class="fas fa-egg food-icon"></i>
+                        <div>
+                            <strong>Samples tested:</strong>
+                            <div>Egg white, Chicken soup, Gelatin</div>
+                        </div>
+                    </div>
+                    <div class="reaction-demo">
+                        <div class="color-change" style="background: #1e88e5;">Blue</div>
+                        <i class="fas fa-arrow-right" style="color: #81c784; font-size: 1.5rem;"></i>
+                        <div class="color-change" style="background: #8e24aa;">Violet</div>
+                    </div>
+                    <p><strong>Positive result:</strong> Color change from blue to violet</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2><i class="fas fa-vial"></i> Procedure Summary</h2>
+            <div class="animation-area">
+                <div class="enzyme">E</div>
+                <div class="substrate" style="animation-delay: 0s;"></div>
+                <div class="substrate" style="animation-delay: 2s;"></div>
+                <div class="substrate" style="animation-delay: 4s;"></div>
+                <div style="position: absolute; bottom: 20px; color: #81c784; font-weight: bold; text-align: center;">
+                    Biochemical Reactions in Foods
+                </div>
+            </div>
+            
+            <h3 style="color: #a5d6a7; margin-top: 30px;">Key Steps:</h3>
+            <ol style="margin-left: 20px; font-size: 1.1rem;">
+                <li><strong>Preparation:</strong> Create extracts from food samples (potato, onion, dates).</li>
+                <li><strong>Reducing Sugars Test:</strong> Add Benedict's reagent, heat in water bath, observe color change.</li>
+                <li><strong>Starch Test:</strong> Add iodine solution, observe immediate color change.</li>
+                <li><strong>Lipids Test:</strong> Apply samples to filter paper, add Sudan III dye, rinse, observe stains.</li>
+                <li><strong>Proteins Test:</strong> Add Biuret reagent to samples, observe color change.</li>
+                <li><strong>Analysis:</strong> Compare results with control (water) to determine presence/absence of molecules.</li>
+            </ol>
+        </section>
+        
+        <section class="section">
+            <h2><i class="fas fa-clipboard-check"></i> Expected Results</h2>
+            
+            <h3 style="color: #a5d6a7; margin: 25px 0 15px 0;">Table 1: Reducing Sugars in Food Samples</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Food Sample</th>
+                            <th>Expected Observation</th>
+                            <th>Conclusion</th>
+                            <th>Intensity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Potato Extract</td>
+                            <td>Little to no color change</td>
+                            <td><span class="negative">Negative/Weak</span></td>
+                            <td>Low</td>
+                        </tr>
+                        <tr>
+                            <td>Onion Extract</td>
+                            <td>Green to orange color</td>
+                            <td><span class="positive">Positive</span></td>
+                            <td>Medium</td>
+                        </tr>
+                        <tr>
+                            <td>Dates Extract</td>
+                            <td>Red/Brown precipitate</td>
+                            <td><span class="positive">Strong Positive</span></td>
+                            <td>High</td>
+                        </tr>
+                        <tr>
+                            <td>Water (Control)</td>
+                            <td>No change (remains blue)</td>
+                            <td><span class="negative">Negative</span></td>
+                            <td>None</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3 style="color: #a5d6a7; margin: 25px 0 15px 0;">Table 2: Starch in Food Samples</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Food Sample</th>
+                            <th>Expected Observation</th>
+                            <th>Conclusion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Potato Extract</td>
+                            <td>Blue-black color</td>
+                            <td><span class="positive">Strong Positive</span></td>
+                        </tr>
+                        <tr>
+                            <td>Onion Extract</td>
+                            <td>Yellow-brown color</td>
+                            <td><span class="negative">Negative</span></td>
+                        </tr>
+                        <tr>
+                            <td>Dates Extract</td>
+                            <td>Red-brown color</td>
+                            <td><span class="negative">Negative</span></td>
+                        </tr>
+                        <tr>
+                            <td>Water (Control)</td>
+                            <td>Yellow-brown color</td>
+                            <td><span class="negative">Negative</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2><i class="fas fa-lightbulb"></i> Scientific Principles</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; margin-top: 20px;">
+                <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 10px;">
+                    <h4 style="color: #ffcc80; margin-bottom: 10px;"><i class="fas fa-atom"></i> Reducing Sugars</h4>
+                    <p>Sugars with free aldehyde or ketone groups can reduce Cu²⁺ to Cu⁺ oxide, causing color change in Benedict's reagent.</p>
+                </div>
+                <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 10px;">
+                    <h4 style="color: #ffcc80; margin-bottom: 10px;"><i class="fas fa-magnet"></i> Starch-Iodine Complex</h4>
+                    <p>Iodine fits into the helical structure of amylose in starch, forming a blue-black charge-transfer complex.</p>
+                </div>
+                <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 10px;">
+                    <h4 style="color: #ffcc80; margin-bottom: 10px;"><i class="fas fa-tint"></i> Hydrophobic Interaction</h4>
+                    <p>Sudan III dye is non-polar and dissolves in lipid regions, staining them orange due to hydrophobic interactions.</p>
+                </div>
+                <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 10px;">
+                    <h4 style="color: #ffcc80; margin-bottom: 10px;"><i class="fas fa-link"></i> Biuret Reaction</h4>
+                    <p>Peptide bonds in proteins form violet complexes with copper ions in alkaline conditions (coordination complex).</p>
+                </div>
+            </div>
+        </section>
+        
+        <div class="conclusion-box">
+            <h3><i class="fas fa-conclusion"></i> Key Takeaways</h3>
+            <ul style="margin-top: 15px;">
+                <li>Different foods contain different types and amounts of biological molecules.</li>
+                <li>Dates are rich in reducing sugars, potatoes in starch, olive oil in lipids, and egg white in proteins.</li>
+                <li>Biochemical tests provide qualitative analysis of food composition.</li>
+                <li>Control experiments (water) are essential to validate test results.</li>
+                <li>Understanding food composition helps in nutritional analysis and diet planning.</li>
+            </ul>
+        </div>
+        
+        <div class="practical-nav">
+            <a href="#" class="nav-btn">
+                <i class="fas fa-arrow-left"></i> Previous: Practical 6
+            </a>
+            <a href="#" class="nav-btn">
+                Next: Practical 8 <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        
+        <footer>
+            <p><i class="fas fa-microscope"></i> BIOL 2101: General Biology I | Sultan Qaboos University</p>
+            <p>Laboratory Manual - Practical 7: Identification of Biological Molecules in Foods</p>
+            <p style="margin-top: 15px; color: #81c784;">Interactive HTML Presentation with Scientific Animations</p>
+        </footer>
+    </div>
+
+    <script>
+        // Animate color changes in the reducing sugars demo
+        document.addEventListener('DOMContentLoaded', function() {
+            const color1 = document.getElementById('color1');
+            const color2 = document.getElementById('color2');
+            const color3 = document.getElementById('color3');
+            
+            function startColorAnimation() {
+                setTimeout(() => {
+                    color1.style.background = '#43a047';
+                    color1.textContent = 'Green';
+                    
+                    setTimeout(() => {
+                        color2.style.background = '#fb8c00';
+                        color2.textContent = 'Orange';
+                        
+                        setTimeout(() => {
+                            color3.style.background = '#e53935';
+                            color3.textContent = 'Red';
+                            
+                            // Reset after completion
+                            setTimeout(() => {
+                                color1.style.background = '#1e88e5';
+                                color1.textContent = 'Blue';
+                                color2.style.background = '#43a047';
+                                color2.textContent = 'Green';
+                                color3.style.background = '#e53935';
+                                color3.textContent = 'Red/Brown';
+                                
+                                // Repeat animation
+                                setTimeout(startColorAnimation, 2000);
+                            }, 2000);
+                        }, 2000);
+                    }, 2000);
+                }, 2000);
+            }
+            
+            startColorAnimation();
+            
+            // Add floating animation to test cards on hover
+            const testCards = document.querySelectorAll('.test-card');
+            testCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    const icon = this.querySelector('.test-icon');
+                    if (icon) {
+                        icon.style.transform = 'scale(1.3) rotate(10deg)';
+                        icon.style.transition = 'transform 0.3s ease';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    const icon = this.querySelector('.test-icon');
+                    if (icon) {
+                        icon.style.transform = 'scale(1) rotate(0deg)';
+                    }
+                });
+            });
+            
+            // Create additional floating molecules
+            for (let i = 0; i < 8; i++) {
+                const molecule = document.createElement('div');
+                molecule.className = 'molecule';
+                molecule.innerHTML = '<i class="fas fa-circle" style="font-size: 1.2rem;"></i>';
+                molecule.style.top = `${Math.random() * 90}%`;
+                molecule.style.left = `${Math.random() * 90}%`;
+                molecule.style.animationDelay = `${Math.random() * 10}s`;
+                molecule.style.color = i % 2 === 0 ? '#81c784' : '#4caf50';
+                document.querySelector('.container').appendChild(molecule);
+            }
+        });
+    </script>
+</body>
+</html>

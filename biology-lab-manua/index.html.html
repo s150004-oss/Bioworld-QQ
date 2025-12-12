@@ -1,0 +1,2882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIOL 2101: General Biology I - Complete Lab Manual</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f9f0;
+            color: #1a3c27;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(76, 175, 80, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(56, 142, 60, 0.05) 0%, transparent 20%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #1b5e20 0%, #388e3c 100%);
+            color: white;
+            padding: 30px 0;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        header p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .university-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 50%;
+            width: 90px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            border: 2px solid #c8e6c9;
+        }
+        
+        .nav-links a:hover {
+            background-color: #2e7d32;
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* Main Content Toggle */
+        .content-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+        
+        .toggle-btn {
+            background-color: white;
+            color: #2e7d32;
+            border: 2px solid #2e7d32;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .toggle-btn:hover {
+            background-color: #e8f5e9;
+            transform: translateY(-3px);
+        }
+        
+        .toggle-btn.active {
+            background-color: #2e7d32;
+            color: white;
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+        }
+        
+        /* Main Content Sections */
+        .content-section {
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Practicals Grid */
+        .practicals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .practical-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-top: 5px solid;
+        }
+        
+        .practical-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .practical-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #4caf50, #2e7d32);
+        }
+        
+        .practical-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #e8f5e9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2.2rem;
+            color: #2e7d32;
+            transition: all 0.3s ease;
+        }
+        
+        .practical-card:hover .practical-icon {
+            background-color: #2e7d32;
+            color: white;
+            transform: rotate(15deg) scale(1.1);
+        }
+        
+        .practical-card h3 {
+            color: #1b5e20;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .practical-card p {
+            color: #4a4a4a;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+        
+        .card-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .view-btn, .quiz-btn {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .view-btn {
+            background-color: #4caf50;
+            color: white;
+        }
+        
+        .quiz-btn {
+            background-color: #2196f3;
+            color: white;
+        }
+        
+        .view-btn:hover, .quiz-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .view-btn:hover {
+            background-color: #2e7d32;
+        }
+        
+        .quiz-btn:hover {
+            background-color: #1976d2;
+        }
+        
+        /* Quiz Section Styles */
+        .quiz-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .labs-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .lab-btn {
+            background-color: white;
+            color: #2e7d32;
+            border: 2px solid #4caf50;
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .lab-btn:hover {
+            background-color: #4caf50;
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .lab-btn.active {
+            background-color: #2e7d32;
+            color: white;
+            box-shadow: 0 5px 10px rgba(52, 152, 219, 0.3);
+        }
+        
+        .lab-content {
+            display: none;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .lab-content.active {
+            display: block;
+        }
+        
+        .lab-title {
+            color: #1b5e20;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #4caf50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .lab-description {
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            font-style: italic;
+            border-left: 4px solid #1abc9c;
+        }
+        
+        .question-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            color: #2e7d32;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .question-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+            transition: transform 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .question-card:hover {
+            transform: translateX(5px);
+        }
+        
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+        
+        .option:hover {
+            background-color: #e8f4fc;
+            border-color: #3498db;
+        }
+        
+        .option.selected {
+            background-color: #d6eaf8;
+            border-color: #3498db;
+        }
+        
+        .option.correct {
+            background-color: #d5f4e6;
+            border-color: #27ae60;
+        }
+        
+        .option.incorrect {
+            background-color: #fadbd8;
+            border-color: #e74c3c;
+        }
+        
+        .option-letter {
+            background-color: #4caf50;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .option.selected .option-letter {
+            background-color: #2e7d32;
+        }
+        
+        .blank-input {
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            width: 200px;
+            font-size: 1rem;
+            margin: 0 5px;
+        }
+        
+        .blank-input:focus {
+            outline: none;
+            border-color: #4caf50;
+        }
+        
+        .blank-input.correct {
+            border-color: #27ae60;
+            background-color: #d5f4e6;
+        }
+        
+        .blank-input.incorrect {
+            border-color: #e74c3c;
+            background-color: #fadbd8;
+        }
+        
+        .true-false-options {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        
+        .true-false-btn {
+            padding: 10px 25px;
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            background-color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .true-false-btn:hover {
+            background-color: #e8f5e9;
+        }
+        
+        .true-false-btn.selected {
+            background-color: #4caf50;
+            color: white;
+        }
+        
+        .true-false-btn.correct {
+            background-color: #27ae60;
+            color: white;
+            border-color: #27ae60;
+        }
+        
+        .true-false-btn.incorrect {
+            background-color: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .check-btn {
+            background-color: #1abc9c;
+            color: white;
+        }
+        
+        .check-btn:hover {
+            background-color: #16a085;
+            transform: translateY(-3px);
+        }
+        
+        .reset-btn {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            border: 2px solid #ddd;
+        }
+        
+        .reset-btn:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .score-board {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            margin-top: 30px;
+            border-top: 5px solid #1abc9c;
+        }
+        
+        .score-title {
+            color: #1b5e20;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .score-display {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+        
+        .score-details {
+            color: #7f8c8d;
+            font-size: 1rem;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #1abc9c;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .feedback {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .feedback.correct {
+            background-color: #d5f4e6;
+            color: #27ae60;
+            border-left: 4px solid #27ae60;
+        }
+        
+        .feedback.incorrect {
+            background-color: #fadbd8;
+            color: #e74c3c;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .feedback.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .feedback-icon {
+            margin-right: 10px;
+        }
+        
+        /* Biology Animation */
+        .biology-animation {
+            height: 200px;
+            background: linear-gradient(180deg, #1a3c34 0%, #0d281c 100%);
+            border-radius: 15px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cell-animation {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            animation: cell-pulse 4s infinite alternate;
+        }
+        
+        .dna-helix {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+        }
+        
+        .dna-strand {
+            position: absolute;
+            width: 3px;
+            height: 100%;
+            background-color: #4fc3f7;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: dna-rotate 15s infinite linear;
+        }
+        
+        .dna-base {
+            position: absolute;
+            width: 20px;
+            height: 3px;
+            background-color: #ff4081;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .microscope {
+            position: absolute;
+            bottom: 20px;
+            right: 50px;
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.3);
+            animation: microscope-focus 5s infinite alternate;
+        }
+        
+        /* زر ملفات التلخيص */
+        .summary-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            border-left: 5px solid #ff9800;
+            border-right: 5px solid #ff9800;
+        }
+        
+        .summary-title {
+            color: #e65100;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .summary-description {
+            color: #4a4a4a;
+            margin-bottom: 25px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        .drive-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #4285F4 0%, #0F9D58 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);
+        }
+        
+        .drive-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(66, 133, 244, 0.4);
+            background: linear-gradient(135deg, #3367D6 0%, #0B8043 100%);
+        }
+        
+        .drive-btn i {
+            font-size: 1.3rem;
+        }
+        
+        .summary-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            font-size: 1.8rem;
+            color: #4285F4;
+        }
+        
+        .summary-icons i {
+            transition: all 0.3s ease;
+        }
+        
+        .summary-icons i:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        .fa-file-pdf { color: #FF3D00; }
+        .fa-file-word { color: #2B579A; }
+        .fa-file-powerpoint { color: #D24726; }
+        .fa-file-excel { color: #217346; }
+        .fa-file-image { color: #4CAF50; }
+        
+        /* قسم التنبيه */
+        .notice-box {
+            background-color: #FFF8E1;
+            border-left: 4px solid #FFC107;
+            padding: 15px 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            text-align: left;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .notice-title {
+            color: #FF8F00;
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            border-top: 1px solid #c8e6c9;
+            color: #2e7d32;
+            font-size: 0.95rem;
+            background-color: white;
+            border-radius: 10px;
+        }
+        
+        .footer-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            font-size: 1.8rem;
+            color: #4caf50;
+        }
+        
+        .footer-icons i {
+            transition: all 0.3s ease;
+        }
+        
+        .footer-icons i:hover {
+            color: #2e7d32;
+            transform: translateY(-5px);
+        }
+        
+        /* Animations */
+        @keyframes cell-pulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+        }
+        
+        @keyframes dna-rotate {
+            0% { transform: translateX(-50%) rotate(0deg); }
+            100% { transform: translateX(-50%) rotate(360deg); }
+        }
+        
+        @keyframes microscope-focus {
+            0% { transform: scale(1); opacity: 0.3; }
+            100% { transform: scale(1.1); opacity: 0.7; }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .practicals-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .university-badge {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin: 15px auto;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-links a {
+                width: 80%;
+                text-align: center;
+            }
+            
+            .practicals-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-toggle {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .toggle-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .labs-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .lab-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .true-false-options {
+                flex-direction: column;
+            }
+            
+            .blank-input {
+                width: 100%;
+                margin: 10px 0;
+            }
+            
+            .card-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .view-btn, .quiz-btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .drive-btn {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+            
+            .summary-title {
+                font-size: 1.5rem;
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
+        /* Loading Animation */
+        .loading-cell {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            z-index: 1000;
+        }
+        
+        .loading-cell div {
+            position: absolute;
+            border: 4px solid #4caf50;
+            opacity: 1;
+            border-radius: 50%;
+            animation: loading-cell 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+        }
+        
+        .loading-cell div:nth-child(2) {
+            animation-delay: -0.5s;
+        }
+        
+        @keyframes loading-cell {
+            0% {
+                top: 36px;
+                left: 36px;
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+            100% {
+                top: 0px;
+                left: 0px;
+                width: 72px;
+                height: 72px;
+                opacity: 0;
+            }
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #4caf50;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: #2e7d32;
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>BIOL 2101: General Biology I</h1>
+            <p>Complete Laboratory Manual with Interactive Questions</p>
+            <p>Sultan Qaboos University - Department of Biology</p>
+            <div class="university-badge">
+                <i class="fas fa-microscope"></i>
+            </div>
+        </header>
+        
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#practicals">All Practicals</a></li>
+                <li><a href="#microscope">Microscope Guide</a></li>
+                <li><a href="#safety">Lab Safety</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <div class="biology-animation">
+            <div class="cell-animation"></div>
+            <div class="dna-helix">
+                <div class="dna-strand">
+                    <div class="dna-base" style="top: 10%;"></div>
+                    <div class="dna-base" style="top: 25%;"></div>
+                    <div class="dna-base" style="top: 40%;"></div>
+                    <div class="dna-base" style="top: 55%;"></div>
+                    <div class="dna-base" style="top: 70%;"></div>
+                    <div class="dna-base" style="top: 85%;"></div>
+                </div>
+            </div>
+            <div class="microscope">
+                <i class="fas fa-microscope"></i>
+            </div>
+        </div>
+        
+        <!-- Content Toggle Buttons -->
+        <div class="content-toggle">
+            <button class="toggle-btn active" id="toggleManual">
+                <i class="fas fa-book"></i> Lab Manual
+            </button>
+            <button class="toggle-btn" id="toggleQuiz">
+                <i class="fas fa-question-circle"></i> Practice Questions
+            </button>
+        </div>
+        
+        <!-- Lab Manual Section -->
+        <div class="content-section active" id="manualSection">
+            <h2 id="practicals" style="color: #1b5e20; margin: 30px 0 20px; text-align: center; font-size: 2.2rem;">
+                <i class="fas fa-vial"></i> Laboratory Practicals
+            </h2>
+            
+            <div class="practicals-grid">
+                <!-- Practical 1 -->
+                <div class="practical-card">
+                    <div class="practical-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Practical 1</h3>
+                    <p>Using the Transmission Microscope - Practice on Focusing</p>
+                    <div class="card-buttons">
+                        <a href="Practical 1.html" class="view-btn" target="_blank">View Practical</a>
+                        <button class="quiz-btn" data-lab="lab1">Practice Questions</button>
+                    </div>
+                </div>
+                
+                <!-- Practical 2 -->
+                <div class="practical-card">
+                    <div class="practical-icon">
+                        <i class="fas fa-amoeba"></i>
+                    </div>
+                    <h3>Practical 2</h3>
+                    <p>Diversity of Protista (Eukaryotic Cells)</p>
+                    <div class="card-buttons">
+                        <a href="Practical 2.html" class="view-btn" target="_blank">View Practical</a>
+                        <button class="quiz-btn" data-lab="lab2">Practice Questions</button>
+                    </div>
+                </div>
+                
+                <!-- Practical 3 -->
+                <div class="practical-card">
+                    <div class="practical-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>Practical 3</h3>
+                    <p>Diversity of Fungi (Eukaryotic Cells)</p>
+                    <div class="card-buttons">
+                        <a href="Practical 3.html" class="view-btn" target="_blank">View Practical</a>
+                        <button class="quiz-btn" data-lab="lab3">Practice Questions</button>
+                    </div>
+                </div>
+                
+                <!-- Practical 4 -->
+                <div class="practical-card">
+                    <div class="practical-icon">
+                        <i class="fas fa-bacterium"></i>
+                    </div>
+                    <h3>Practical 4</h3>
+                    <p>Diversity of Bacteria (Prokaryotic Cells)</p>
+                    <div class="card-buttons">
+                        <a href="Practical 4.html" class="view-btn" target="_blank">View Practical</a>
+                        <button class="quiz-btn" data-lab="lab4">Practice Questions</button>
+                    </div>
+                </div>
+                
+                <!-- Practical 5 -->
+                <div class="practical-card">
+                    <div class="practical-icon">
+                        <i class="fas fa-ruler"></i>
+                    </div>
+                    <h3>Practical 5</h3>
+                    <p>Using the Transmission Microscope – Measurement of Cell Size</p>
+                    <div class="card-buttons">
+                        <a href="Practical 5.html" class="view-btn" target="_blank">View Practical</a>
+                        <button class="quiz-btn" data-lab="lab5">Practice Questions</button>
+                    </div>
+                </div>
+                
+                <!-- Practical 6 -->
+                <div class="practical-card">
+                    <div class="practical-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Practical 6</h3>
+                    <p>Plant Cell Structure & Tissues</p>
+                    <div class="card-buttons">
+                        <a href="Practical 6.html" class="view-btn" target="_blank">View Practical</a>
+                        <button class="quiz-btn" data-lab="lab6">Practice Questions</button>
+                    </div>
+                </div>
+                
+                <!-- Practical 7 -->
+                <div class="practical-card">
+                    <div class="practical-icon">
+                        <i class="fas fa-dna"></i>
+                    </div>
+                    <h3>Practical 7</h3>
+                    <p>Biological Molecules in Foods</p>
+                    <div class="card-buttons">
+                        <a href="Practical 7.html" class="view-btn" target="_blank">View Practical</a>
+                        <button class="quiz-btn" data-lab="lab7">Practice Questions</button>
+                    </div>
+                </div>
+                
+                <!-- Practical 8 -->
+                <div class="practical-card">
+                    <div class="practical-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>Practical 8</h3>
+                    <p>DNA Extraction & Analysis</p>
+                    <div class="card-buttons">
+                        <a href="Practical 8.html" class="view-btn" target="_blank">View Practical</a>
+                        <button class="quiz-btn" data-lab="lab8">Practice Questions</button>
+                    </div>
+                </div>
+                
+                <!-- Practical 9 -->
+                <div class="practical-card">
+                    <div class="practical-icon">
+                        <i class="fas fa-filter"></i>
+                    </div>
+                    <h3>Practical 9</h3>
+                    <p>Membrane Diffusion and Transport</p>
+                    <div class="card-buttons">
+                        <a href="Practical 9.html" class="view-btn" target="_blank">View Practical</a>
+                        <button class="quiz-btn" data-lab="lab9">Practice Questions</button>
+                    </div>
+                </div>
+                
+                <!-- Practical 10 -->
+                <div class="practical-card">
+                    <div class="practical-icon">
+                        <i class="fas fa-divide"></i>
+                    </div>
+                    <h3>Practical 10</h3>
+                    <p>Mitosis and Meiosis in Cells</p>
+                    <div class="card-buttons">
+                        <a href="Practical 10.html" class="view-btn" target="_blank">View Practical</a>
+                        <button class="quiz-btn" data-lab="lab10">Practice Questions</button>
+                    </div>
+                </div>
+                
+                <!-- Practical 11 -->
+                <div class="practical-card">
+                    <div class="practical-icon">
+                        <i class="fas fa-vial"></i>
+                    </div>
+                    <h3>Practical 11</h3>
+                    <p>Purification of the Enzyme Amylase</p>
+                    <div class="card-buttons">
+                        <a href="Practical 11.html" class="view-btn" target="_blank">View Practical</a>
+                        <button class="quiz-btn" data-lab="lab11">Practice Questions</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lab Safety Section -->
+            <div id="safety" style="background-color: white; border-radius: 15px; padding: 30px; margin: 40px 0; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);">
+                <h2 style="color: #1b5e20; margin-bottom: 20px; text-align: center;">
+                    <i class="fas fa-exclamation-triangle"></i> Laboratory Safety Guidelines
+                </h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+                    <div style="background-color: #f1f8e9; padding: 20px; border-radius: 10px;">
+                        <h4 style="color: #558b2f; margin-bottom: 10px;"><i class="fas fa-coat"></i> Personal Protection</h4>
+                        <p>Always wear lab coats, safety goggles, and gloves when handling biological specimens or chemicals.</p>
+                    </div>
+                    <div style="background-color: #f1f8e9; padding: 20px; border-radius: 10px;">
+                        <h4 style="color: #558b2f; margin-bottom: 10px;"><i class="fas fa-utensils"></i> No Food or Drink</h4>
+                        <p>Never eat, drink, or store food in the laboratory to prevent contamination and ingestion of hazardous materials.</p>
+                    </div>
+                    <div style="background-color: #f1f8e9; padding: 20px; border-radius: 10px;">
+                        <h4 style="color: #558b2f; margin-bottom: 10px;"><i class="fas fa-hand-sparkles"></i> Hand Hygiene</h4>
+                        <p>Wash hands thoroughly before and after laboratory work, especially when handling biological materials.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Microscope Guide Section -->
+            <div id="microscope" style="background-color: white; border-radius: 15px; padding: 30px; margin: 40px 0; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);">
+                <h2 style="color: #1b5e20; margin-bottom: 20px; text-align: center;">
+                    <i class="fas fa-microscope"></i> Microscope Guide
+                </h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; color: #2e7d32; margin-bottom: 10px;">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h4 style="color: #1b5e20; margin-bottom: 10px;">Proper Focusing</h4>
+                        <p>Always start with the lowest magnification objective when focusing.</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; color: #2e7d32; margin-bottom: 10px;">
+                            <i class="fas fa-ruler"></i>
+                        </div>
+                        <h4 style="color: #1b5e20; margin-bottom: 10px;">Measurement Techniques</h4>
+                        <p>Use stage micrometer and eyepiece graticule for accurate cell measurements.</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; color: #2e7d32; margin-bottom: 10px;">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h4 style="color: #1b5e20; margin-bottom: 10px;">Optimal Lighting</h4>
+                        <p>Adjust diaphragm and condenser for proper illumination and contrast.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Resources Section -->
+            <div id="resources" style="background-color: white; border-radius: 15px; padding: 30px; margin: 40px 0; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);">
+                <h2 style="color: #1b5e20; margin-bottom: 20px; text-align: center;">
+                    <i class="fas fa-book"></i> Learning Resources
+                </h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+                    <div style="background-color: #f1f8e9; padding: 20px; border-radius: 10px;">
+                        <h4 style="color: #558b2f; margin-bottom: 10px;"><i class="fas fa-video"></i> Video Tutorials</h4>
+                        <p>Step-by-step video guides for each practical procedure.</p>
+                    </div>
+                    <div style="background-color: #f1f8e9; padding: 20px; border-radius: 10px;">
+                        <h4 style="color: #558b2f; margin-bottom: 10px;"><i class="fas fa-download"></i> Downloadable PDFs</h4>
+                        <p>Printable worksheets and data recording sheets.</p>
+                    </div>
+                    <div style="background-color: #f1f8e9; padding: 20px; border-radius: 10px;">
+                        <h4 style="color: #558b2f; margin-bottom: 10px;"><i class="fas fa-question-circle"></i> FAQ & Troubleshooting</h4>
+                        <p>Common issues and solutions for each experiment.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- قسم ملفات التلخيص -->
+            <div class="summary-section">
+                <h2 class="summary-title">
+                    <i class="fas fa-file-alt"></i> Lab Summary Files & Resources
+                </h2>
+                
+                <p class="summary-description">
+                    Access comprehensive summary files, study guides, and additional resources for all biology lab practicals. 
+                    These materials include detailed explanations, diagrams, and revision notes to help you prepare for exams 
+                    and understand complex concepts more easily.
+                </p>
+                
+                <a href="https://drive.google.com/drive/folders/13dxS2utgLeWyu7RHDi-_9CLdPY2Ujk4s" 
+                   class="drive-btn" 
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <i class="fab fa-google-drive"></i>
+                    Open Summary Files on Google Drive
+                </a>
+                
+                <div class="summary-icons">
+                    <i class="fas fa-file-pdf" title="PDF Files"></i>
+                    <i class="fas fa-file-word" title="Word Documents"></i>
+                    <i class="fas fa-file-powerpoint" title="PowerPoint Presentations"></i>
+                    <i class="fas fa-file-excel" title="Excel Sheets"></i>
+                    <i class="fas fa-file-image" title="Images & Diagrams"></i>
+                </div>
+                
+                <div class="notice-box">
+                    <div class="notice-title">
+                        <i class="fas fa-info-circle"></i> Important Notice
+                    </div>
+                    <p>These resources are provided for educational purposes only. Please respect copyright and use them for personal study.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quiz Section -->
+        <div class="content-section" id="quizSection">
+            <div class="quiz-section">
+                <h2 style="color: #1b5e20; margin: 0 0 20px; text-align: center; font-size: 2.2rem;">
+                    <i class="fas fa-question-circle"></i> Biology Lab Practice Questions
+                </h2>
+                <p style="text-align: center; color: #4a4a4a; margin-bottom: 30px;">
+                    Test your knowledge of biology laboratory techniques, microscopy, cell biology, biochemistry, and more.
+                </p>
+                
+                <div class="labs-nav" id="labsNav">
+                    <!-- Lab buttons will be generated here -->
+                </div>
+                
+                <div id="labContent">
+                    <!-- Lab content will be loaded here -->
+                </div>
+                
+                <div class="score-board">
+                    <div class="score-title">Your Score</div>
+                    <div class="score-display" id="scoreDisplay">0%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="score-details" id="scoreDetails">0 out of 0 questions answered correctly</div>
+                </div>
+            </div>
+
+            <!-- قسم ملفات التلخيص في قسم الأسئلة أيضا -->
+            <div class="summary-section">
+                <h2 class="summary-title">
+                    <i class="fas fa-file-alt"></i> Need More Study Materials?
+                </h2>
+                
+                <p class="summary-description">
+                    Access comprehensive summary files, study guides, and additional resources for all biology lab practicals. 
+                    These materials will help you better understand the concepts tested in these practice questions.
+                </p>
+                
+                <a href="https://drive.google.com/drive/folders/13dxS2utgLeWyu7RHDi-_9CLdPY2Ujk4s" 
+                   class="drive-btn" 
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <i class="fab fa-google-drive"></i>
+                    Open Summary Files on Google Drive
+                </a>
+                
+                <div class="summary-icons">
+                    <i class="fas fa-file-pdf" title="PDF Files"></i>
+                    <i class="fas fa-file-word" title="Word Documents"></i>
+                    <i class="fas fa-file-powerpoint" title="PowerPoint Presentations"></i>
+                    <i class="fas fa-file-excel" title="Excel Sheets"></i>
+                    <i class="fas fa-file-image" title="Images & Diagrams"></i>
+                </div>
+                
+                <div class="notice-box">
+                    <div class="notice-title">
+                        <i class="fas fa-info-circle"></i> Important Notice
+                    </div>
+                    <p>These resources are provided for educational purposes only. Please respect copyright and use them for personal study.</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <h3>BIOL 2101 Laboratory Manual</h3>
+            <p>Sultan Qaboos University | Department of Biology</p>
+            <p>This interactive lab manual provides comprehensive guidance for General Biology I laboratory sessions with integrated practice questions.</p>
+            
+            <div class="footer-icons">
+                <i class="fas fa-microscope"></i>
+                <i class="fas fa-dna"></i>
+                <i class="fas fa-seedling"></i>
+                <i class="fas fa-bacterium"></i>
+                <i class="fas fa-vial"></i>
+                <i class="fas fa-question-circle"></i>
+            </div>
+            
+            <p><i class="fas fa-clock"></i> Last Updated: November 2023 | <i class="fas fa-user-graduate"></i> For Academic Use Only</p>
+            <p id="contact" style="margin-top: 10px;"><i class="fas fa-envelope"></i> Contact: biol2101@squ.edu.om</p>
+        </footer>
+    </div>
+    
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <!-- Loading Animation -->
+    <div class="loading-cell" id="loadingCell">
+        <div></div>
+        <div></div>
+    </div>
+    
+    <script>
+        // Lab data structure - Complete with all labs
+        const labData = {
+            lab1: {
+                title: "Lab 1: Microscope Use",
+                description: "Learn about microscope parts, focusing techniques, and proper microscope handling.",
+                multipleChoice: [
+                    {
+                        question: "What is the first objective lens you should use when starting to focus a specimen?",
+                        options: ["High power (x40)", "Medium power (x10)", "Low power (x4)", "Oil immersion (x100)"],
+                        correctAnswer: 2
+                    },
+                    {
+                        question: "What is the function of the iris diaphragm in a microscope?",
+                        options: ["Magnify the specimen", "Adjust the light entering the microscope", "Move the stage up and down", "Clean the lenses"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "Which part of the microscope holds the slide in place?",
+                        options: ["Eyepiece", "Stage clip", "Coarse focus knob", "Condenser"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "When focusing under high power, which knob should you use?",
+                        options: ["Coarse focus", "Fine focus", "Stage micrometer", "Diaphragm"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "What should you do before removing a slide from the microscope?",
+                        options: ["Clean the lenses", "Rotate the low-power objective into position", "Turn off the light", "Remove the eyepiece"],
+                        correctAnswer: 1
+                    }
+                ],
+                fillInBlanks: [
+                    {
+                        question: "The ______ is used to adjust the distance between the eyepieces to fit your eyes.",
+                        correctAnswer: "interpupillary adjustment"
+                    },
+                    {
+                        question: "The ______ lens has a blue ring and magnifies the specimen by x40.",
+                        correctAnswer: "high-power"
+                    },
+                    {
+                        question: "The ______ is the part of the microscope that transmits light through the specimen.",
+                        correctAnswer: "condenser"
+                    },
+                    {
+                        question: "Always start focusing with the ______ objective lens.",
+                        correctAnswer: "low power"
+                    },
+                    {
+                        question: "The ______ helps determine the order of colored silk threads by focusing on each layer.",
+                        correctAnswer: "fine focus knob"
+                    }
+                ],
+                trueFalse: [
+                    {
+                        question: "You should use the coarse focus knob when using the high-power objective.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "The oil immersion lens has a white ring and magnifies by x100.",
+                        correctAnswer: true
+                    },
+                    {
+                        question: "The diaphragm controls the amount of light passing through the specimen.",
+                        correctAnswer: true
+                    },
+                    {
+                        question: "You should remove the slide while the high-power objective is in position.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "The fine focus knob is used for sharpening the image after coarse focusing.",
+                        correctAnswer: true
+                    }
+                ]
+            },
+            lab2: {
+                title: "Lab 2: Protists",
+                description: "Study protist classification, structures, and functions.",
+                multipleChoice: [
+                    {
+                        question: "Protists are:",
+                        options: ["Prokaryotes", "Eukaryotes", "Unicellular", "Multicellular"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "Excess water is removed from Paramecium by:",
+                        options: ["Cilia", "Flagella", "Chloroplast", "Contractile vacuole"],
+                        correctAnswer: 3
+                    },
+                    {
+                        question: "Arcella differs from Amoeba by having:",
+                        options: ["Flagella", "Cilia", "Shell", "Eye spot"],
+                        correctAnswer: 2
+                    },
+                    {
+                        question: "Euglena has green chloroplasts which allow it to perform:",
+                        options: ["Photosynthesis", "Chemosynthesis", "Phagocytosis", "Spore formation"],
+                        correctAnswer: 0
+                    },
+                    {
+                        question: "Which Protist is known to use pseudopodia for movement?",
+                        options: ["Euglena", "Paramecium", "Arcella", "Bursaria"],
+                        correctAnswer: 2
+                    }
+                ],
+                fillInBlanks: [
+                    {
+                        question: "Amoeba moves using temporary extensions called ______",
+                        correctAnswer: "pseudopodia"
+                    },
+                    {
+                        question: "The ______ in Euglena helps it detect light for photosynthesis.",
+                        correctAnswer: "eyespot"
+                    },
+                    {
+                        question: "Paramecium has two nuclei: the macromucleus and the ______",
+                        correctAnswer: "micronucleus"
+                    },
+                    {
+                        question: "The oral groove in Paramecium leads to the ______, where food is ingested.",
+                        correctAnswer: "cytostome"
+                    },
+                    {
+                        question: "______ is a chemical used to slow down fast-moving Protists for observation.",
+                        correctAnswer: "protoslo"
+                    }
+                ],
+                trueFalse: [
+                    {
+                        question: "Euglena is a photosynthetic Protist with chloroplasts.",
+                        correctAnswer: true
+                    },
+                    {
+                        question: "Paramecium reproduces only sexually.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "Arcella is an amoeba with a protective shell.",
+                        correctAnswer: true
+                    },
+                    {
+                        question: "Bursaria is a type of flagellate.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "Protists are prokaryotic organisms.",
+                        correctAnswer: false
+                    }
+                ]
+            },
+            lab3: {
+                title: "Lab 3: Fungi",
+                description: "Explore fungal characteristics, reproduction, and symbiotic relationships.",
+                multipleChoice: [
+                    {
+                        question: "Which of the following is NOT true about fungi?",
+                        options: ["Some form symbiotic relations", "They are all eukaryotic", "They can reproduce sexually & asexually", "They are all multicellular"],
+                        correctAnswer: 3
+                    },
+                    {
+                        question: "Which of the following best describes the method by which Yeast cells reproduce asexually?",
+                        options: ["Budding", "Conidia", "Soredia", "Sporangiospores"],
+                        correctAnswer: 0
+                    },
+                    {
+                        question: "Which part of the mushroom will you be looking at under the microscope?",
+                        options: ["Annulus", "Lamela (gills)", "Shoots", "Stipe"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "Lichens are a symbiotic association between:",
+                        options: ["Plant & fungi", "Two different cyanobacteria", "Green algae & cyanobacteria", "A fungus & green algae"],
+                        correctAnswer: 3
+                    },
+                    {
+                        question: "Penicillium can be mostly found in:",
+                        options: ["Fruits & vegetables", "Pond water", "Blue Cheese", "Bread"],
+                        correctAnswer: 2
+                    }
+                ],
+                fillInBlanks: [
+                    {
+                        question: "Yeasts reproduce asexually by ______",
+                        correctAnswer: "budding"
+                    },
+                    {
+                        question: "The fungal body is made up of thread-like structures called ______",
+                        correctAnswer: "hyphae"
+                    },
+                    {
+                        question: "Unlike plant cells, fungal cells do not contain ______ in their cell walls.",
+                        correctAnswer: "cellulose"
+                    },
+                    {
+                        question: "Mushrooms produce spores on structures called ______",
+                        correctAnswer: "gills"
+                    },
+                    {
+                        question: "The stalk of the mushroom is called ______",
+                        correctAnswer: "stipe"
+                    }
+                ],
+                trueFalse: [
+                    {
+                        question: "All fungi are multicellular.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "Penicillium has septate hyphae.",
+                        correctAnswer: true
+                    },
+                    {
+                        question: "Rhizopus has septate hyphae.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "Yeasts are filamentous fungi.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "Fungal spores are produced only sexually.",
+                        correctAnswer: false
+                    }
+                ]
+            },
+            lab4: {
+                title: "Lab 4: Bacteria",
+                description: "Study bacterial morphology, Gram staining, and bacterial functions.",
+                multipleChoice: [
+                    {
+                        question: "Which bacterial shape is spiral-shaped?",
+                        options: ["Cocci", "Bacilli", "Spirilla", "Vibrios"],
+                        correctAnswer: 2
+                    },
+                    {
+                        question: "What is the purpose of Gram staining?",
+                        options: ["To measure bacterial size", "To classify bacteria based on cell wall composition", "To observe bacterial movement", "To kill bacteria"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "Which bacteria are Gram-positive?",
+                        options: ["Escherichia coli", "Staphylococcus aureus", "Pseudomonas aeruginosa", "Rhizobium"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "What is the function of the capsule in bacteria?",
+                        options: ["Photosynthesis", "Protection and adhesion", "DNA replication", "Flagella formation"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "Which bacteria are used in yogurt production?",
+                        options: ["Lactobacillus and Streptococcus", "E. coli and Salmonella", "Bacillus and Clostridium", "Mycobacterium and Staphylococcus"],
+                        correctAnswer: 0
+                    }
+                ],
+                fillInBlanks: [
+                    {
+                        question: "The ______ stain differentiates bacteria into Gram-positive and Gram-negative.",
+                        correctAnswer: "gram"
+                    },
+                    {
+                        question: "Bacteria reproduce asexually by ______",
+                        correctAnswer: "binary fission"
+                    },
+                    {
+                        question: "The cell wall of Gram-negative bacteria contains ______",
+                        correctAnswer: "lipopolysaccharides"
+                    },
+                    {
+                        question: "______ is a dye used in the Gram staining procedure.",
+                        correctAnswer: "crystal violet"
+                    },
+                    {
+                        question: "The oil immersion lens is used to observe ______",
+                        correctAnswer: "bacteria"
+                    }
+                ],
+                trueFalse: [
+                    {
+                        question: "All bacteria are harmful to humans.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "Gram-negative bacteria have a thick peptidoglycan layer.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "Lactobacillus is used in cheese and yogurt production.",
+                        correctAnswer: true
+                    },
+                    {
+                        question: "Bacterial flagella are used for reproduction.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "Gram staining uses crystal violet and safranin.",
+                        correctAnswer: true
+                    }
+                ]
+            },
+            lab5: {
+                title: "Lab 5: Cell Measurement",
+                description: "Learn cell observation, staining techniques, and magnification calculations.",
+                multipleChoice: [
+                    {
+                        question: "In today's lab, cells from which plant species will be observed?",
+                        options: ["Aloe vera", "Aquaria Victoria", "Rheeo discolor", "Mus musculus"],
+                        correctAnswer: 2
+                    },
+                    {
+                        question: "Which reagent is added to the animal cells to see the organelles clearly?",
+                        options: ["Crystal violet", "Iodine", "Safranin", "Methylene blue"],
+                        correctAnswer: 3
+                    },
+                    {
+                        question: "In today's lab, iodine is used to clearly observe the:",
+                        options: ["Cell wall", "Central vacuole", "Cytoplasm", "Nucleus"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "A micrometer slide is used to:",
+                        options: ["Measure the length of a specimen", "Calibrate the objective lens", "Stain the specimen", "None of the above"],
+                        correctAnswer: 0
+                    },
+                    {
+                        question: "What is the magnification of a drawing with a length of 40 mm, if the actual specimen length is 0.2 mm?",
+                        options: ["100", "200", "300", "400"],
+                        correctAnswer: 1
+                    }
+                ],
+                fillInBlanks: [
+                    {
+                        question: "The ______ is used to measure the size of microscopic objects.",
+                        correctAnswer: "eyepiece graticule"
+                    },
+                    {
+                        question: "Plant cells have a rigid ______, which animal cells lack.",
+                        correctAnswer: "cell wall"
+                    },
+                    {
+                        question: "Rheeo discolor is an ______ plant.",
+                        correctAnswer: "aquatic"
+                    },
+                    {
+                        question: "The ______ is the part of the microscope that holds the slide.",
+                        correctAnswer: "stage"
+                    },
+                    {
+                        question: "To calculate magnification, divide the ______ by the actual size.",
+                        correctAnswer: "drawing size"
+                    }
+                ],
+                trueFalse: [
+                    {
+                        question: "Animal cells have a cell wall.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "We use iodine stain to clearly see the Rheeo discolor nucleus.",
+                        correctAnswer: true
+                    },
+                    {
+                        question: "The stage micrometer is placed on the slide for calibration.",
+                        correctAnswer: true
+                    },
+                    {
+                        question: "Chloroplasts are found in animal cells.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "The eyepiece graticule has 100 equal divisions.",
+                        correctAnswer: true
+                    }
+                ]
+            },
+            lab6: {
+                title: "Lab 6: Biomolecules",
+                description: "Learn biochemical tests for carbohydrates, proteins, and lipids.",
+                multipleChoice: [
+                    {
+                        question: "Which test is used to detect reducing sugars?",
+                        options: ["Biuret test", "Benedict's test", "Sudan III test", "Molisch's test"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "What color indicates a positive Biuret test for proteins?",
+                        options: ["Blue", "Violet", "Red", "Green"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "Which reagent turns blue-black in the presence of starch?",
+                        options: ["Iodine", "Benedict's solution", "Fehling's solution", "Sudan III"],
+                        correctAnswer: 0
+                    },
+                    {
+                        question: "What is the purpose of the Molisch test?",
+                        options: ["Detect lipids", "Detect all carbohydrates", "Detect proteins", "Detect nucleic acids"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "Which test specifically identifies pentoses?",
+                        options: ["Benedict's test", "Bial's test", "Sudan III test", "Biuret test"],
+                        correctAnswer: 1
+                    }
+                ],
+                fillInBlanks: [
+                    {
+                        question: "The ______ test uses concentrated sulfuric acid to detect carbohydrates.",
+                        correctAnswer: "molisch"
+                    },
+                    {
+                        question: "A green precipitate in Benedict's test indicates ______ amounts of reducing sugars.",
+                        correctAnswer: "small"
+                    },
+                    {
+                        question: "The ______ test stains lipids orange.",
+                        correctAnswer: "sudan iii"
+                    },
+                    {
+                        question: "In the Biuret test, peptide bonds react with ______ ions.",
+                        correctAnswer: "copper"
+                    },
+                    {
+                        question: "The depth of the color in the Biuret test is a measure of the number of ______ bonds.",
+                        correctAnswer: "peptide"
+                    }
+                ],
+                trueFalse: [
+                    {
+                        question: "Benedict's reagent turns red-brown in the presence of reducing sugars.",
+                        correctAnswer: true
+                    },
+                    {
+                        question: "Sudan III dissolves in water.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "The Biuret test is specific for starch.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "Bial's test gives a blue-green color with pentoses.",
+                        correctAnswer: true
+                    },
+                    {
+                        question: "Molisch's test is negative for glycine.",
+                        correctAnswer: true
+                    }
+                ]
+            },
+            lab7: {
+                title: "Lab 7: Food Tests",
+                description: "Identify food components using chemical reagents.",
+                multipleChoice: [
+                    {
+                        question: "Which of the following is used as a control in identification of biological molecules?",
+                        options: ["Gelatine", "Sudan III", "Iodine", "Water"],
+                        correctAnswer: 3
+                    },
+                    {
+                        question: "Sudan II is the orange dye that can interact with the hydrocarbon chain of ......",
+                        options: ["fat", "starch", "glycogen", "gelatine"],
+                        correctAnswer: 0
+                    },
+                    {
+                        question: "Formation of green color in Benedict's test indicates ......:",
+                        options: ["no reducing sugars", "small amount of reducing sugars", "medium amount of reducing sugars", "large amount of reducing sugars"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "The negative result for Biuret test would be ......",
+                        options: ["light blue", "dark blue", "light violet", "dark violet"],
+                        correctAnswer: 0
+                    },
+                    {
+                        question: "All of the following are reducing sugars EXCEPT ......:",
+                        options: ["sucrose", "maltose", "glucose", "fructose"],
+                        correctAnswer: 0
+                    }
+                ],
+                fillInBlanks: [
+                    {
+                        question: "The ______ test uses copper sulfate to detect reducing sugars.",
+                        correctAnswer: "benedict's"
+                    },
+                    {
+                        question: "A negative control in the lipid test is ______.",
+                        correctAnswer: "water"
+                    },
+                    {
+                        question: "Proteins are detected when Biuret reagent turns ______.",
+                        correctAnswer: "violet"
+                    },
+                    {
+                        question: "The ______ test uses iodine to identify polysaccharides.",
+                        correctAnswer: "starch"
+                    },
+                    {
+                        question: "Lipids are not soluble in ______, so water is used as a control in this experiment.",
+                        correctAnswer: "water"
+                    }
+                ],
+                trueFalse: [
+                    {
+                        question: "Benedict's test is specific for sucrose.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "Water is used as a negative control in Sudan III tests.",
+                        correctAnswer: true
+                    },
+                    {
+                        question: "Egg white contains mostly lipids.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "Dates extract tested positive for reducing sugars.",
+                        correctAnswer: true
+                    },
+                    {
+                        question: "Iodine reacts with glucose to form a blue color.",
+                        correctAnswer: false
+                    }
+                ]
+            },
+            lab8: {
+                title: "Lab 8: DNA Extraction",
+                description: "Learn DNA isolation principles and techniques.",
+                multipleChoice: [
+                    {
+                        question: "What is the purpose of dishwashing soap in DNA extraction?",
+                        options: ["Precipitate DNA", "Break cell membranes", "Stain DNA", "Digest proteins"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "Why is cold alcohol used in DNA extraction?",
+                        options: ["To dissolve DNA", "To precipitate DNA", "To break cell walls", "To inhibit enzymes"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "Why is it important not to stir the solution too harshly after adding dishwashing soap?",
+                        options: ["It might cause the solution to become too cold", "It could break the DNA strands", "It will prevent the DNA from dissolving", "It may cause the salt to separate from the solution"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "DNA appears as ______ during extraction.",
+                        options: ["blue crystals", "White filaments", "green solution", "red precipitate"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "Salt (NaCl) helps in DNA extraction by:",
+                        options: ["Breaking hydrogen bonds", "Cutting protein", "Breaking cell membrane", "Helping DNA precipitate"],
+                        correctAnswer: 3
+                    }
+                ],
+                fillInBlanks: [
+                    {
+                        question: "DNA precipitates at the interface between ______ and the pea solution.",
+                        correctAnswer: "alcohol"
+                    },
+                    {
+                        question: "The ______ method uses a blender to homogenize peas.",
+                        correctAnswer: "blender"
+                    },
+                    {
+                        question: "Meat tenderizer contains ______, which cuts proteins.",
+                        correctAnswer: "papain"
+                    },
+                    {
+                        question: "DNA is insoluble in ______ alcohol.",
+                        correctAnswer: "cold"
+                    },
+                    {
+                        question: "To extract DNA from split peas, the solution is cooled by placing it in the ______ or on ice for 10 minutes.",
+                        correctAnswer: "refrigerator"
+                    }
+                ],
+                trueFalse: [
+                    {
+                        question: "Hot alcohol is more effective for DNA precipitation.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "Detergent disrupts the nuclear membrane.",
+                        correctAnswer: true
+                    },
+                    {
+                        question: "DNA can be extracted without salt.",
+                        correctAnswer: true
+                    },
+                    {
+                        question: "The supernatant after centrifugation contains DNA.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "Papain powder cuts proteins away from DNA.",
+                        correctAnswer: true
+                    }
+                ]
+            },
+            lab9: {
+                title: "Lab 9: Diffusion & Osmosis",
+                description: "Study membrane transport, osmosis, and plasmolysis.",
+                multipleChoice: [
+                    {
+                        question: "What happens to a cell in a hypertonic solution?",
+                        options: ["Swells", "Shrinks", "Bursts", "Remains unchanged"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "Which molecule can diffuse through a dialysis membrane?",
+                        options: ["Starch", "NaOH", "Iodine", "Protein"],
+                        correctAnswer: 2
+                    },
+                    {
+                        question: "Plasmolysis occurs when plant cells are placed in:",
+                        options: ["Hypotonic solution", "Isotonic solution", "Hypertonic solution", "Distilled water"],
+                        correctAnswer: 2
+                    },
+                    {
+                        question: "Osmosis is the movement of:",
+                        options: ["Solutes", "Water", "Ions", "Protein"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "What color change occurs if starch diffuses out of the dialysis tube?",
+                        options: ["Blue to colorless", "Red to blue", "Brown to yellow", "Green to red"],
+                        correctAnswer: 0
+                    }
+                ],
+                fillInBlanks: [
+                    {
+                        question: "A ______ membrane allows selective passage of molecules.",
+                        correctAnswer: "selectively permeable"
+                    },
+                    {
+                        question: "Phenolphthalein turns ______ in basic solutions.",
+                        correctAnswer: "pink"
+                    },
+                    {
+                        question: "The sucrose concentration that causes 50% plasmolysis is the ______ point.",
+                        correctAnswer: "isotonic"
+                    },
+                    {
+                        question: "Water moves from ______ to ______ solute concentration.",
+                        correctAnswer: "low, high"
+                    },
+                    {
+                        question: "______ is the shrinking of cytoplasm in hypertonic solutions.",
+                        correctAnswer: "plasmolysis"
+                    }
+                ],
+                trueFalse: [
+                    {
+                        question: "Iodine molecules are smaller than starch.",
+                        correctAnswer: true
+                    },
+                    {
+                        question: "Plant cells burst in hypotonic solutions.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "Osmometers measure osmotic pressure.",
+                        correctAnswer: true
+                    },
+                    {
+                        question: "Plasmolysis is reversible.",
+                        correctAnswer: true
+                    },
+                    {
+                        question: "All solutes can diffuse through dialysis tubing.",
+                        correctAnswer: false
+                    }
+                ]
+            },
+            lab10: {
+                title: "Lab 10: Mitosis & Meiosis",
+                description: "Study cell division processes and chromosomal behavior.",
+                multipleChoice: [
+                    {
+                        question: "Which phase of mitosis aligns chromosomes at the equator?",
+                        options: ["Prophase", "Metaphase", "Anaphase", "Telophase"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "Meiosis produces:",
+                        options: ["2 diploid cells", "4 haploid cells", "2 haploid cells", "4 diploid cells"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "Crossing-over occurs during:",
+                        options: ["Mitosis", "Meiosis I", "Meiosis II", "Cytokinesis"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "The longest phase of the cell cycle is:",
+                        options: ["Prophase", "Metaphase", "Interphase", "Telophase"],
+                        correctAnswer: 2
+                    },
+                    {
+                        question: "Which structure forms the spindle fibers?",
+                        options: ["Centrioles", "Nucleolus", "Ribosomes", "Lysosomes"],
+                        correctAnswer: 0
+                    }
+                ],
+                fillInBlanks: [
+                    {
+                        question: "______ is the pairing of homologous chromosomes in meiosis.",
+                        correctAnswer: "synapsis"
+                    },
+                    {
+                        question: "Cytokinesis in plant cells involves formation of a ______.",
+                        correctAnswer: "cell plate"
+                    },
+                    {
+                        question: "The ______ stage is absent between meiosis I and II.",
+                        correctAnswer: "interphase"
+                    },
+                    {
+                        question: "Mitosis maintains a ______ chromosome number.",
+                        correctAnswer: "diploid"
+                    },
+                    {
+                        question: "______ are visible as condensed threads in prophase.",
+                        correctAnswer: "chromosomes"
+                    }
+                ],
+                trueFalse: [
+                    {
+                        question: "Sister chromatids separate in anaphase I of meiosis.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "Mitosis occurs in somatic cells.",
+                        correctAnswer: true
+                    },
+                    {
+                        question: "Tetrads form during mitosis.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "Meiosis reduces chromosome number by half.",
+                        correctAnswer: true
+                    },
+                    {
+                        question: "Centrioles are present in plant cells.",
+                        correctAnswer: false
+                    }
+                ]
+            },
+            lab11: {
+                title: "Lab 11: Enzyme Activity",
+                description: "Study amylase function, enzyme denaturation, and assay methods.",
+                multipleChoice: [
+                    {
+                        question: "Amylase breaks down:",
+                        options: ["Proteins", "Lipids", "Starch", "DNA"],
+                        correctAnswer: 2
+                    },
+                    {
+                        question: "What indicates a positive test for starch?",
+                        options: ["Red precipitate", "Blue-black color", "Violet solution", "Green precipitate"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "Boiling amylase before testing its activity will:",
+                        options: ["Increase enzyme activity", "Denature the enzyme", "Have no effect", "Precipitate starch"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "Methanol is used to:",
+                        options: ["Digest starch", "Precipitate amylase", "Stain proteins", "Dilute enzymes"],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "Which test detects reducing sugars?",
+                        options: ["Biuret", "Benedict's", "Sudan III", "Iodine"],
+                        correctAnswer: 1
+                    }
+                ],
+                fillInBlanks: [
+                    {
+                        question: "All enzymes are ______.",
+                        correctAnswer: "proteins"
+                    },
+                    {
+                        question: "______ reagent tests for reducing sugars.",
+                        correctAnswer: "benedict's"
+                    },
+                    {
+                        question: "Centrifugation separates ______ from the supernatant.",
+                        correctAnswer: "debris"
+                    },
+                    {
+                        question: "Boiling destroys enzyme activity by ______.",
+                        correctAnswer: "denaturation"
+                    },
+                    {
+                        question: "The control experiment tests for ______ contamination.",
+                        correctAnswer: "starch"
+                    }
+                ],
+                trueFalse: [
+                    {
+                        question: "Amylase works optimally at 0°C.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "Iodine turns orange-brown when present with starch.",
+                        correctAnswer: false
+                    },
+                    {
+                        question: "Methanol precipitates amylase.",
+                        correctAnswer: true
+                    },
+                    {
+                        question: "Centrifugation separates cellular debris.",
+                        correctAnswer: true
+                    },
+                    {
+                        question: "Boiled amylase can hydrolyze starch.",
+                        correctAnswer: false
+                    }
+                ]
+            }
+        };
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Content toggle functionality
+            const toggleManual = document.getElementById('toggleManual');
+            const toggleQuiz = document.getElementById('toggleQuiz');
+            const manualSection = document.getElementById('manualSection');
+            const quizSection = document.getElementById('quizSection');
+            
+            toggleManual.addEventListener('click', function() {
+                toggleManual.classList.add('active');
+                toggleQuiz.classList.remove('active');
+                manualSection.classList.add('active');
+                quizSection.classList.remove('active');
+            });
+            
+            toggleQuiz.addEventListener('click', function() {
+                toggleQuiz.classList.add('active');
+                toggleManual.classList.remove('active');
+                quizSection.classList.add('active');
+                manualSection.classList.remove('active');
+                // Initialize quiz if not already initialized
+                if (!quizInitialized) {
+                    initializeQuiz();
+                    quizInitialized = true;
+                }
+            });
+            
+            // Quiz buttons in practical cards
+            document.querySelectorAll('.quiz-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const labId = this.getAttribute('data-lab');
+                    
+                    // Switch to quiz section
+                    toggleQuiz.click();
+                    
+                    // Wait for quiz section to load, then activate the specific lab
+                    setTimeout(() => {
+                        if (!quizInitialized) {
+                            initializeQuiz();
+                            quizInitialized = true;
+                        }
+                        
+                        // Activate the specific lab button
+                        const labBtn = document.querySelector(`.lab-btn[data-lab="${labId}"]`);
+                        if (labBtn) {
+                            labBtn.click();
+                        }
+                    }, 100);
+                });
+            });
+            
+            // Initialize quiz navigation
+            let quizInitialized = false;
+            
+            function initializeQuiz() {
+                // Create lab navigation buttons for quiz
+                const labsNav = document.getElementById('labsNav');
+                labsNav.innerHTML = '';
+                
+                for (const labId in labData) {
+                    const lab = labData[labId];
+                    const labNum = labId.replace('lab', '');
+                    
+                    const labBtn = document.createElement('button');
+                    labBtn.className = 'lab-btn';
+                    labBtn.innerHTML = `<i class="fas fa-vial"></i> Lab ${labNum}`;
+                    labBtn.dataset.lab = labId;
+                    
+                    labBtn.addEventListener('click', function() {
+                        // Remove active class from all buttons
+                        document.querySelectorAll('.lab-btn').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        
+                        // Add active class to clicked button
+                        this.classList.add('active');
+                        
+                        // Load lab content
+                        loadLabContent(this.dataset.lab);
+                        
+                        // Reset score
+                        updateScore();
+                    });
+                    
+                    labsNav.appendChild(labBtn);
+                }
+                
+                // Activate first lab by default
+                if (labsNav.firstChild) {
+                    labsNav.firstChild.classList.add('active');
+                    loadLabContent(labsNav.firstChild.dataset.lab);
+                }
+            }
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Switch to manual section if not already there
+                    if (!toggleManual.classList.contains('active')) {
+                        toggleManual.click();
+                    }
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId.startsWith('#')) {
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            setTimeout(() => {
+                                window.scrollTo({
+                                    top: targetElement.offsetTop - 80,
+                                    behavior: 'smooth'
+                                });
+                            }, 100);
+                        }
+                    }
+                });
+            });
+            
+            // DNA helix animation
+            const dnaStrand = document.querySelector('.dna-strand');
+            let rotation = 0;
+            
+            function rotateDNA() {
+                rotation += 0.5;
+                if (dnaStrand) {
+                    dnaStrand.style.transform = `translateX(-50%) rotate(${rotation}deg)`;
+                }
+                requestAnimationFrame(rotateDNA);
+            }
+            
+            rotateDNA();
+            
+            // Back to top button functionality
+            const backToTopButton = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // Show loading animation when navigating to practicals
+            document.querySelectorAll('.view-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') && this.getAttribute('href').includes('Practical')) {
+                        document.getElementById('loadingCell').style.display = 'block';
+                        setTimeout(() => {
+                            document.getElementById('loadingCell').style.display = 'none';
+                        }, 2000);
+                    }
+                });
+            });
+            
+            // Add hover animation to practical cards
+            const practicalCards = document.querySelectorAll('.practical-card');
+            practicalCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Initialize page with animation
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    document.body.style.opacity = 1;
+                }, 100);
+            });
+            
+            // Set initial opacity for fade-in effect
+            document.body.style.opacity = 0;
+            document.body.style.transition = 'opacity 0.5s ease';
+        });
+
+        // Function to load lab content for quiz
+        function loadLabContent(labId) {
+            const lab = labData[labId];
+            const labContent = document.getElementById('labContent');
+            
+            // Clear previous content
+            labContent.innerHTML = '';
+            
+            // Create lab content container
+            const contentContainer = document.createElement('div');
+            contentContainer.className = 'lab-content active';
+            contentContainer.id = `${labId}Content`;
+            
+            // Add lab title
+            const labTitle = document.createElement('h2');
+            labTitle.className = 'lab-title';
+            labTitle.innerHTML = `<i class="fas fa-flask"></i> ${lab.title}`;
+            contentContainer.appendChild(labTitle);
+            
+            // Add lab description
+            const labDescription = document.createElement('div');
+            labDescription.className = 'lab-description';
+            labDescription.textContent = lab.description;
+            contentContainer.appendChild(labDescription);
+            
+            // Add multiple choice questions section
+            const mcqSection = createMultipleChoiceSection(lab.multipleChoice, labId);
+            contentContainer.appendChild(mcqSection);
+            
+            // Add fill in blanks questions section
+            const fillSection = createFillInBlanksSection(lab.fillInBlanks, labId);
+            contentContainer.appendChild(fillSection);
+            
+            // Add true/false questions section
+            const tfSection = createTrueFalseSection(lab.trueFalse, labId);
+            contentContainer.appendChild(tfSection);
+            
+            // Add action buttons
+            const actionButtons = document.createElement('div');
+            actionButtons.className = 'action-buttons';
+            
+            const checkButton = document.createElement('button');
+            checkButton.className = 'btn check-btn';
+            checkButton.innerHTML = '<i class="fas fa-check-circle"></i> Check Answers';
+            checkButton.addEventListener('click', function() {
+                checkLabAnswers(labId);
+            });
+            
+            const resetButton = document.createElement('button');
+            resetButton.className = 'btn reset-btn';
+            resetButton.innerHTML = '<i class="fas fa-redo"></i> Reset Answers';
+            resetButton.addEventListener('click', function() {
+                resetLabAnswers(labId);
+            });
+            
+            actionButtons.appendChild(checkButton);
+            actionButtons.appendChild(resetButton);
+            contentContainer.appendChild(actionButtons);
+            
+            // Add to main content area
+            labContent.appendChild(contentContainer);
+        }
+
+        // Function to create multiple choice questions section
+        function createMultipleChoiceSection(questions, labId) {
+            const section = document.createElement('div');
+            section.className = 'question-section';
+            
+            const sectionTitle = document.createElement('h3');
+            sectionTitle.className = 'section-title';
+            sectionTitle.innerHTML = '<i class="fas fa-list-ol"></i> Multiple Choice Questions';
+            section.appendChild(sectionTitle);
+            
+            questions.forEach((q, index) => {
+                const questionCard = document.createElement('div');
+                questionCard.className = 'question-card';
+                questionCard.dataset.questionType = 'mcq';
+                questionCard.dataset.questionIndex = index;
+                questionCard.dataset.labId = labId;
+                
+                const questionText = document.createElement('div');
+                questionText.className = 'question-text';
+                questionText.textContent = `${index + 1}. ${q.question}`;
+                questionCard.appendChild(questionText);
+                
+                const optionsContainer = document.createElement('div');
+                optionsContainer.className = 'options';
+                
+                q.options.forEach((option, optionIndex) => {
+                    const optionElement = document.createElement('div');
+                    optionElement.className = 'option';
+                    optionElement.dataset.optionIndex = optionIndex;
+                    
+                    const optionLetter = document.createElement('div');
+                    optionLetter.className = 'option-letter';
+                    optionLetter.textContent = String.fromCharCode(65 + optionIndex);
+                    
+                    const optionText = document.createElement('div');
+                    optionText.className = 'option-text';
+                    optionText.textContent = option;
+                    
+                    optionElement.appendChild(optionLetter);
+                    optionElement.appendChild(optionText);
+                    
+                    optionElement.addEventListener('click', function() {
+                        // Remove selected class from all options in this question
+                        const allOptions = this.parentElement.querySelectorAll('.option');
+                        allOptions.forEach(opt => opt.classList.remove('selected'));
+                        
+                        // Add selected class to clicked option
+                        this.classList.add('selected');
+                    });
+                    
+                    optionsContainer.appendChild(optionElement);
+                });
+                
+                questionCard.appendChild(optionsContainer);
+                section.appendChild(questionCard);
+            });
+            
+            return section;
+        }
+
+        // Function to create fill in blanks questions section
+        function createFillInBlanksSection(questions, labId) {
+            const section = document.createElement('div');
+            section.className = 'question-section';
+            
+            const sectionTitle = document.createElement('h3');
+            sectionTitle.className = 'section-title';
+            sectionTitle.innerHTML = '<i class="fas fa-edit"></i> Fill in the Blanks';
+            section.appendChild(sectionTitle);
+            
+            questions.forEach((q, index) => {
+                const questionCard = document.createElement('div');
+                questionCard.className = 'question-card';
+                questionCard.dataset.questionType = 'fill';
+                questionCard.dataset.questionIndex = index;
+                questionCard.dataset.labId = labId;
+                
+                // Create question text with input field
+                const questionText = document.createElement('div');
+                questionText.className = 'question-text';
+                
+                // Replace blank with input field
+                const questionParts = q.question.split('______');
+                
+                questionParts.forEach((part, partIndex) => {
+                    questionText.appendChild(document.createTextNode(part));
+                    
+                    if (partIndex < questionParts.length - 1) {
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.className = 'blank-input';
+                        input.placeholder = 'Type your answer here';
+                        questionText.appendChild(input);
+                    }
+                });
+                
+                questionCard.appendChild(questionText);
+                section.appendChild(questionCard);
+            });
+            
+            return section;
+        }
+
+        // Function to create true/false questions section
+        function createTrueFalseSection(questions, labId) {
+            const section = document.createElement('div');
+            section.className = 'question-section';
+            
+            const sectionTitle = document.createElement('h3');
+            sectionTitle.className = 'section-title';
+            sectionTitle.innerHTML = '<i class="fas fa-balance-scale"></i> True or False Questions';
+            section.appendChild(sectionTitle);
+            
+            questions.forEach((q, index) => {
+                const questionCard = document.createElement('div');
+                questionCard.className = 'question-card';
+                questionCard.dataset.questionType = 'tf';
+                questionCard.dataset.questionIndex = index;
+                questionCard.dataset.labId = labId;
+                
+                const questionText = document.createElement('div');
+                questionText.className = 'question-text';
+                questionText.textContent = `${index + 1}. ${q.question}`;
+                questionCard.appendChild(questionText);
+                
+                const optionsContainer = document.createElement('div');
+                optionsContainer.className = 'true-false-options';
+                
+                const trueButton = document.createElement('button');
+                trueButton.className = 'true-false-btn';
+                trueButton.textContent = 'True';
+                trueButton.dataset.value = 'true';
+                trueButton.addEventListener('click', function() {
+                    // Remove selected class from both buttons
+                    const allButtons = this.parentElement.querySelectorAll('.true-false-btn');
+                    allButtons.forEach(btn => btn.classList.remove('selected'));
+                    
+                    // Add selected class to clicked button
+                    this.classList.add('selected');
+                });
+                
+                const falseButton = document.createElement('button');
+                falseButton.className = 'true-false-btn';
+                falseButton.textContent = 'False';
+                falseButton.dataset.value = 'false';
+                falseButton.addEventListener('click', function() {
+                    // Remove selected class from both buttons
+                    const allButtons = this.parentElement.querySelectorAll('.true-false-btn');
+                    allButtons.forEach(btn => btn.classList.remove('selected'));
+                    
+                    // Add selected class to clicked button
+                    this.classList.add('selected');
+                });
+                
+                optionsContainer.appendChild(trueButton);
+                optionsContainer.appendChild(falseButton);
+                questionCard.appendChild(optionsContainer);
+                section.appendChild(questionCard);
+            });
+            
+            return section;
+        }
+
+        // Function to check answers for a lab
+        function checkLabAnswers(labId) {
+            const lab = labData[labId];
+            let correctCount = 0;
+            let totalCount = 0;
+            
+            // Check multiple choice questions
+            const mcqCards = document.querySelectorAll(`[data-lab-id="${labId}"][data-question-type="mcq"]`);
+            mcqCards.forEach(card => {
+                const questionIndex = parseInt(card.dataset.questionIndex);
+                const selectedOption = card.querySelector('.option.selected');
+                const correctAnswer = lab.multipleChoice[questionIndex].correctAnswer;
+                
+                totalCount++;
+                
+                if (selectedOption) {
+                    const selectedIndex = parseInt(selectedOption.dataset.optionIndex);
+                    
+                    if (selectedIndex === correctAnswer) {
+                        correctCount++;
+                        selectedOption.classList.add('correct');
+                        
+                        // Show feedback
+                        showFeedback(card, 'Correct!', 'correct');
+                    } else {
+                        selectedOption.classList.add('incorrect');
+                        
+                        // Highlight correct answer
+                        const correctOption = card.querySelector(`[data-option-index="${correctAnswer}"]`);
+                        if (correctOption) {
+                            correctOption.classList.add('correct');
+                        }
+                        
+                        // Show feedback
+                        showFeedback(card, `Incorrect. The correct answer is ${String.fromCharCode(65 + correctAnswer)}.`, 'incorrect');
+                    }
+                } else {
+                    // Highlight correct answer if none selected
+                    const correctOption = card.querySelector(`[data-option-index="${correctAnswer}"]`);
+                    if (correctOption) {
+                        correctOption.classList.add('correct');
+                    }
+                    
+                    // Show feedback
+                    showFeedback(card, `No answer selected. The correct answer is ${String.fromCharCode(65 + correctAnswer)}.`, 'incorrect');
+                }
+            });
+            
+            // Check fill in blanks questions
+            const fillCards = document.querySelectorAll(`[data-lab-id="${labId}"][data-question-type="fill"]`);
+            fillCards.forEach(card => {
+                const questionIndex = parseInt(card.dataset.questionIndex);
+                const input = card.querySelector('.blank-input');
+                const correctAnswer = lab.fillInBlanks[questionIndex].correctAnswer.toLowerCase().trim();
+                
+                totalCount++;
+                
+                if (input && input.value) {
+                    const userAnswer = input.value.toLowerCase().trim();
+                    
+                    if (userAnswer === correctAnswer) {
+                        correctCount++;
+                        input.classList.add('correct');
+                        
+                        // Show feedback
+                        showFeedback(card, 'Correct!', 'correct');
+                    } else {
+                        input.classList.add('incorrect');
+                        
+                        // Show feedback
+                        showFeedback(card, `Incorrect. The correct answer is "${correctAnswer}".`, 'incorrect');
+                    }
+                } else {
+                    input.classList.add('incorrect');
+                    
+                    // Show feedback
+                    showFeedback(card, `No answer provided. The correct answer is "${correctAnswer}".`, 'incorrect');
+                }
+            });
+            
+            // Check true/false questions
+            const tfCards = document.querySelectorAll(`[data-lab-id="${labId}"][data-question-type="tf"]`);
+            tfCards.forEach(card => {
+                const questionIndex = parseInt(card.dataset.questionIndex);
+                const selectedButton = card.querySelector('.true-false-btn.selected');
+                const correctAnswer = lab.trueFalse[questionIndex].correctAnswer;
+                
+                totalCount++;
+                
+                if (selectedButton) {
+                    const userAnswer = selectedButton.dataset.value === 'true';
+                    
+                    if (userAnswer === correctAnswer) {
+                        correctCount++;
+                        selectedButton.classList.add('correct');
+                        
+                        // Show feedback
+                        showFeedback(card, 'Correct!', 'correct');
+                    } else {
+                        selectedButton.classList.add('incorrect');
+                        
+                        // Highlight correct answer
+                        const correctButton = card.querySelector(`[data-value="${correctAnswer}"]`);
+                        if (correctButton) {
+                            correctButton.classList.add('correct');
+                        }
+                        
+                        // Show feedback
+                        showFeedback(card, `Incorrect. The correct answer is ${correctAnswer ? 'True' : 'False'}.`, 'incorrect');
+                    }
+                } else {
+                    // Highlight correct answer if none selected
+                    const correctButton = card.querySelector(`[data-value="${correctAnswer}"]`);
+                    if (correctButton) {
+                        correctButton.classList.add('correct');
+                    }
+                    
+                    // Show feedback
+                    showFeedback(card, `No answer selected. The correct answer is ${correctAnswer ? 'True' : 'False'}.`, 'incorrect');
+                }
+            });
+            
+            // Update score
+            updateScore(correctCount, totalCount);
+        }
+
+        // Function to show feedback for a question
+        function showFeedback(card, message, type) {
+            // Remove existing feedback
+            const existingFeedback = card.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+            
+            // Create feedback element
+            const feedback = document.createElement('div');
+            feedback.className = `feedback ${type}`;
+            
+            const icon = document.createElement('span');
+            icon.className = 'feedback-icon';
+            icon.innerHTML = type === 'correct' ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-times-circle"></i>';
+            
+            feedback.appendChild(icon);
+            feedback.appendChild(document.createTextNode(message));
+            
+            card.appendChild(feedback);
+            
+            // Show with animation
+            setTimeout(() => {
+                feedback.classList.add('show');
+            }, 10);
+        }
+
+        // Function to reset answers for a lab
+        function resetLabAnswers(labId) {
+            // Reset multiple choice questions
+            const mcqCards = document.querySelectorAll(`[data-lab-id="${labId}"][data-question-type="mcq"]`);
+            mcqCards.forEach(card => {
+                const options = card.querySelectorAll('.option');
+                options.forEach(option => {
+                    option.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                // Remove feedback
+                const feedback = card.querySelector('.feedback');
+                if (feedback) {
+                    feedback.remove();
+                }
+            });
+            
+            // Reset fill in blanks questions
+            const fillCards = document.querySelectorAll(`[data-lab-id="${labId}"][data-question-type="fill"]`);
+            fillCards.forEach(card => {
+                const input = card.querySelector('.blank-input');
+                if (input) {
+                    input.value = '';
+                    input.classList.remove('correct', 'incorrect');
+                }
+                
+                // Remove feedback
+                const feedback = card.querySelector('.feedback');
+                if (feedback) {
+                    feedback.remove();
+                }
+            });
+            
+            // Reset true/false questions
+            const tfCards = document.querySelectorAll(`[data-lab-id="${labId}"][data-question-type="tf"]`);
+            tfCards.forEach(card => {
+                const buttons = card.querySelectorAll('.true-false-btn');
+                buttons.forEach(button => {
+                    button.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                // Remove feedback
+                const feedback = card.querySelector('.feedback');
+                if (feedback) {
+                    feedback.remove();
+                }
+            });
+            
+            // Reset score
+            updateScore();
+        }
+
+        // Function to update score display
+        function updateScore(correct = 0, total = 0) {
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const progressFill = document.getElementById('progressFill');
+            const scoreDetails = document.getElementById('scoreDetails');
+            
+            if (total === 0) {
+                scoreDisplay.textContent = '0%';
+                progressFill.style.width = '0%';
+                scoreDetails.textContent = '0 out of 0 questions answered correctly';
+                return;
+            }
+            
+            const percentage = Math.round((correct / total) * 100);
+            scoreDisplay.textContent = `${percentage}%`;
+            progressFill.style.width = `${percentage}%`;
+            scoreDetails.textContent = `${correct} out of ${total} questions answered correctly`;
+            
+            // Update progress bar color based on score
+            if (percentage >= 80) {
+                progressFill.style.backgroundColor = '#27ae60';
+            } else if (percentage >= 60) {
+                progressFill.style.backgroundColor = '#1abc9c';
+            } else {
+                progressFill.style.backgroundColor = '#e74c3c';
+            }
+        }
+    </script>
+</body>
+</html>
+<!-- محتوى المختبرات (مخفي بشكل افتراضي) -->
+<div id="practical-details" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; padding:20px; overflow-y:auto;">
+    <div style="background:white; max-width:800px; margin:50px auto; padding:30px; border-radius:15px; position:relative;">
+        <button onclick="closePractical()" style="position:absolute; top:15px; right:15px; background:#e74c3c; color:white; border:none; width:30px; height:30px; border-radius:50%; cursor:pointer;">×</button>
+        <div id="practical-content"></div>
+    </div>
+</div>
+
+<script>
+let currentPractical = 1;
+
+// بيانات مختصرة للمختبرات
+const practicalsContent = {
+    1: `<h2>Practical 1: Microscope Use</h2><p>Focusing techniques and proper handling...</p>`,
+    2: `<h2>Practical 2: Protists</h2><p>Study of eukaryotic cell diversity...</p>`,
+    // ... أضف الباقي
+};
+
+function showPractical(num) {
+    currentPractical = num;
+    document.getElementById('practical-content').innerHTML = practicalsContent[num] || 
+        `<h2>Practical ${num}</h2><p>Detailed content coming soon. Practice questions are available.</p>`;
+    document.getElementById('practical-details').style.display = 'block';
+}
+
+function closePractical() {
+    document.getElementById('practical-details').style.display = 'none';
+}
+
+// تعديل الروابط
+document.querySelectorAll('.view-btn').forEach((btn, index) => {
+    btn.onclick = function(e) {
+        e.preventDefault();
+        const practicalNum = index + 1;
+        showPractical(practicalNum);
+    };
+});
+</script>

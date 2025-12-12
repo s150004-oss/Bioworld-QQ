@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIOL 2101: Practical 1 - Using the Transmission Microscope</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f7ff;
+            color: #333;
+            line-height: 1.6;
+            background-image: linear-gradient(to bottom, #e6f2ff, #f0f7ff);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a5f7a 0%, #2a9d8f 100%);
+            color: white;
+            padding: 30px 0;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .university-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .content-section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .section-title {
+            color: #2a9d8f;
+            border-bottom: 2px solid #e0f2f1;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            font-size: 1.5rem;
+        }
+        
+        .microscope-animation {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .animation-container {
+            width: 100%;
+            height: 300px;
+            position: relative;
+            background: linear-gradient(180deg, #0a2647 0%, #144272 100%);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .microscope-base {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 20px;
+            background-color: #2c3e50;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .microscope-arm {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 150px;
+            background-color: #34495e;
+            border-radius: 5px;
+        }
+        
+        .microscope-head {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 40px;
+            background-color: #7f8c8d;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+            align-items: center;
+        }
+        
+        .eyepiece {
+            width: 25px;
+            height: 25px;
+            background-color: #2c3e50;
+            border-radius: 50%;
+            position: relative;
+        }
+        
+        .eyepiece::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background-color: #1a5276;
+            border-radius: 50%;
+        }
+        
+        .objective-lens {
+            position: absolute;
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 40px;
+            background-color: #3498db;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .stage {
+            position: absolute;
+            top: 140px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 10px;
+            background-color: #95a5a6;
+            border-radius: 3px;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 130px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 20px;
+            background-color: #ecf0f1;
+            border-radius: 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .specimen {
+            width: 30px;
+            height: 5px;
+            background-color: #e74c3c;
+            border-radius: 2px;
+            position: relative;
+            animation: specimen-move 5s infinite linear;
+        }
+        
+        .specimen::before, .specimen::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 5px;
+            background-color: #f1c40f;
+            border-radius: 2px;
+            top: -5px;
+        }
+        
+        .specimen::after {
+            top: auto;
+            bottom: -5px;
+            background-color: #9b59b6;
+        }
+        
+        .light-source {
+            position: absolute;
+            top: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 10px;
+            background-color: #f39c12;
+            border-radius: 5px;
+        }
+        
+        .light-beam {
+            position: absolute;
+            top: 140px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 40px;
+            background-color: rgba(243, 156, 18, 0.6);
+            animation: light-pulse 2s infinite alternate;
+        }
+        
+        .focus-controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .control-btn {
+            background-color: #2a9d8f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .control-btn:hover {
+            background-color: #21867a;
+        }
+        
+        .instructions {
+            background-color: #e8f4fc;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .instructions h4 {
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+        
+        ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .objectives-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .objective-item {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 3px solid #2a9d8f;
+        }
+        
+        .objective-item i {
+            color: #2a9d8f;
+            margin-right: 10px;
+        }
+        
+        .specimen-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .specimen-card {
+            flex: 1;
+            min-width: 200px;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border-top: 4px solid #9b59b6;
+        }
+        
+        .specimen-card h4 {
+            color: #8e44ad;
+            margin-bottom: 10px;
+        }
+        
+        .specimen-card p {
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid #ddd;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .highlight {
+            background-color: #fffacd;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        
+        @keyframes specimen-move {
+            0% { transform: translateX(-15px); }
+            50% { transform: translateX(15px); }
+            100% { transform: translateX(-15px); }
+        }
+        
+        @keyframes light-pulse {
+            0% { opacity: 0.4; }
+            100% { opacity: 0.8; }
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .university-badge {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin: 15px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>BIOL 2101: General Biology I</h1>
+            <p>Practical 1: Using the Transmission Microscope - Practice on Focusing</p>
+            <p>Sultan Qaboos University | Department of Biology</p>
+            <div class="university-badge">
+                <i class="fas fa-microscope"></i>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="content-section">
+                <h2 class="section-title"><i class="fas fa-bullseye"></i> Practical Objectives</h2>
+                <p>This practical will teach you how to use a transmission microscope, emphasizing the importance of focusing and controlling the amount of light. We will also study, identify and focus on Protista, single eukaryotic cell organisms with no cell wall.</p>
+                
+                <div class="objectives-list">
+                    <div class="objective-item">
+                        <i class="fas fa-search"></i> Focus the microscope when examining coloured silk threads
+                    </div>
+                    <div class="objective-item">
+                        <i class="fas fa-lightbulb"></i> Control the light entering the microscope using the diaphragm
+                    </div>
+                    <div class="objective-item">
+                        <i class="fas fa-eye"></i> Identify and focus different Protists
+                    </div>
+                    <div class="objective-item">
+                        <i class="fas fa-draw-polygon"></i> Study and draw characteristics of different types of typical Protists
+                    </div>
+                </div>
+                
+                <div class="instructions">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Key Safety Rules</h4>
+                    <ul>
+                        <li>Always wear your lab coat inside the laboratory</li>
+                        <li>Never eat, drink or smoke in the laboratory</li>
+                        <li>Follow all instructions carefully</li>
+                        <li>Keep the laboratory clean and report any spills immediately</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="microscope-animation">
+                <h2 class="section-title"><i class="fas fa-play-circle"></i> Microscope Simulation</h2>
+                <p>Observe the animated transmission microscope below. The light passes through the specimen, allowing you to view cellular structures.</p>
+                
+                <div class="animation-container">
+                    <div class="microscope-base"></div>
+                    <div class="microscope-arm"></div>
+                    <div class="microscope-head">
+                        <div class="eyepiece"></div>
+                        <div class="eyepiece"></div>
+                    </div>
+                    <div class="objective-lens"></div>
+                    <div class="stage"></div>
+                    <div class="slide">
+                        <div class="specimen"></div>
+                    </div>
+                    <div class="light-source"></div>
+                    <div class="light-beam"></div>
+                </div>
+                
+                <p class="animation-description">The animation shows how light transmits through the specimen on the stage, allowing observation of cellular details.</p>
+                
+                <div class="focus-controls">
+                    <button class="control-btn" id="coarseFocus">
+                        <i class="fas fa-arrows-alt-v"></i> Coarse Focus
+                    </button>
+                    <button class="control-btn" id="fineFocus">
+                        <i class="fas fa-search"></i> Fine Focus
+                    </button>
+                    <button class="control-btn" id="adjustLight">
+                        <i class="fas fa-adjust"></i> Adjust Diaphragm
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="section-title"><i class="fas fa-vial"></i> Procedure Summary</h2>
+            
+            <h3><i class="fas fa-list-ol"></i> 1. The Transmission Microscope: How to Use</h3>
+            <ul>
+                <li>Place the slide on the stage, securing it with the stage clip</li>
+                <li>Adjust the eyepieces to fit your eyes - use both eyes for viewing</li>
+                <li>Always start with the <span class="highlight">low power (4X) objective</span></li>
+                <li>Focus first using the <span class="highlight">coarse focus</span>, then refine with <span class="highlight">fine focus</span></li>
+                <li>Adjust light using the iris diaphragm - less light often gives sharper image</li>
+                <li>When finished, rotate back to low power before removing slide</li>
+            </ul>
+            
+            <h3><i class="fas fa-threads"></i> 2. Focusing on Coloured Silk Threads</h3>
+            <p>You will be provided with a slide containing 3 coloured silk threads arranged in layers. By carefully focusing, determine which colour is on top, in the middle, and underneath.</p>
+            
+            <div class="instructions">
+                <h4><i class="fas fa-flask"></i> Technique Tip</h4>
+                <p>To determine thread order: Lower the stage completely, then slowly raise it until the first thread comes into focus. This is the top thread. Continue focusing to find the middle and bottom threads.</p>
+            </div>
+            
+            <h3><i class="fas fa-microorganism"></i> 3. Focusing on Biological Specimens</h3>
+            <div class="specimen-section">
+                <div class="specimen-card">
+                    <h4><i class="fas fa-amoeba"></i> Amoeba</h4>
+                    <p>Single-celled Protist that moves using pseudopodia. Observe the nucleus and cytoplasmic streaming.</p>
+                </div>
+                <div class="specimen-card">
+                    <h4><i class="fas fa-dumbbell"></i> Skeletal Muscle</h4>
+                    <p>Striated muscle tissue with long, multinucleated fibers. Note the peripheral nuclei.</p>
+                </div>
+                <div class="specimen-card">
+                    <h4><i class="fas fa-heart"></i> Cardiac Muscle</h4>
+                    <p>Involuntary striated muscle with centrally located nuclei. Look for intercalated discs.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="section-title"><i class="fas fa-pencil-alt"></i> Biological Drawings Guidelines</h2>
+            <p>Many practicals require you to make drawings of observed specimens. Follow these guidelines:</p>
+            
+            <ul>
+                <li><strong>Large:</strong> Drawing should fill at least half the page</li>
+                <li><strong>Pencil only:</strong> Use a sharp 3H pencil for clean lines</li>
+                <li><strong>No shading:</strong> Do not shade your drawings</li>
+                <li><strong>Title:</strong> Include a descriptive title above or below</li>
+                <li><strong>Labels:</strong> Arrange neatly with ruler-drawn connecting lines that don't cross</li>
+                <li><strong>Accuracy:</strong> Represent what you actually see, not textbook images</li>
+            </ul>
+            
+            <div class="instructions">
+                <h4><i class="fas fa-lightbulb"></i> Pro Tip</h4>
+                <p>When drawing, focus on one structure at a time. Start with the overall shape, then add organelles and details. Use the fine focus knob to see different depths in the specimen.</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>BIOL 2101 Laboratory Manual - Sultan Qaboos University</p>
+            <p>Transmission microscopy is fundamental to biological research. Mastery of these techniques will serve you throughout your scientific career.</p>
+            <p><i class="fas fa-vial"></i> Remember to bring your lab manual, pencil, eraser, calculator, and ruler to every lab session.</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Interactive elements for the microscope animation
+        document.getElementById('coarseFocus').addEventListener('click', function() {
+            alert('Coarse Focus: Used for initial focusing at low magnification. Turn slowly to avoid crashing the objective into the slide.');
+        });
+        
+        document.getElementById('fineFocus').addEventListener('click', function() {
+            alert('Fine Focus: Used for precise focusing, especially at high magnification. Makes small adjustments to bring specimen into sharp clarity.');
+        });
+        
+        document.getElementById('adjustLight').addEventListener('click', function() {
+            alert('Iris Diaphragm: Adjusts the amount of light passing through the specimen. Closing it increases contrast but reduces brightness. Find the optimal balance for your specimen.');
+        });
+        
+        // Add some interactivity to the specimen in the animation
+        const specimen = document.querySelector('.specimen');
+        const animationContainer = document.querySelector('.animation-container');
+        
+        animationContainer.addEventListener('mouseenter', function() {
+            specimen.style.animationDuration = '3s';
+        });
+        
+        animationContainer.addEventListener('mouseleave', function() {
+            specimen.style.animationDuration = '5s';
+        });
+    </script>
+</body>
+</html>
